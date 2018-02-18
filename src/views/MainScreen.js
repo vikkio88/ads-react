@@ -18,13 +18,12 @@ class MainScreenView extends Component {
         if (viewComponent) {
             return (
                 <div className="appView">
-                    <Grid centered stretched columns={1}>
+                    <Grid centered stretched columns={1} doubling>
                         <Grid.Row>
                             <Button fluid onClick={() => this.props.back()} size="massive">
                                 <Icon name="step backward" /> Back
                             </Button>
                         </Grid.Row>
-                        <Grid.Row/>
                         <Grid.Row>
                             {viewComponent}
                         </Grid.Row>

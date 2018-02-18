@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {MainScreen} from './views/MainScreen';
-import {Container} from "semantic-ui-react";
+import {Container, Header} from "semantic-ui-react";
 import {Provider} from 'react-redux';
 import {store} from "./store";
 
@@ -10,6 +10,7 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <div className="App">
+                    <Header />
                     <Container>
                         <MainScreen/>
                     </Container>

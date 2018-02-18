@@ -4,16 +4,19 @@ import {AppIcon} from "../components";
 
 const apps = [
     {
+        name: "mail",
         icon: "mail outline",
-        label: "mail"
+        label: "Mail"
     },
     {
+        name: "news",
         icon: "newspaper",
-        label: "news"
+        label: "News"
     },
     {
+        name: "calendar",
         icon: "calendar outline",
-        label: "calendar"
+        label: "Calendar"
     },
 ];
 
