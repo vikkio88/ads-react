@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Dashboard, Mail, News, Calendar} from './';
 import {navigate} from "../store/actions";
+import {Button, Grid, Icon} from "semantic-ui-react";
 
 const componentMap = {
     'mail': <Mail/>,
@@ -16,9 +17,18 @@ class MainScreenView extends Component {
 
         if (viewComponent) {
             return (
-                <div>
-                    {viewComponent}
-                    <a onClick={() => this.props.back()}>BACK</a>
+                <div className="appView">
+                    <Grid centered stretched columns={1}>
+                        <Grid.Row>
+                            <Button fluid onClick={() => this.props.back()} size="massive">
+                                <Icon name="step backward" /> Back
+                            </Button>
+                        </Grid.Row>
+                        <Grid.Row/>
+                        <Grid.Row>
+                            {viewComponent}
+                        </Grid.Row>
+                    </Grid>
                 </div>
             );
         }
