@@ -1,25 +1,32 @@
 import React, {Component} from 'react';
 import './App.css';
 import {MainScreen} from './views/MainScreen';
+import {Login} from './views/Login';
 import {Card, Container, Header} from "semantic-ui-react";
 import {Provider} from 'react-redux';
 import {store} from "./store";
-import {setDate} from "./store/actions";
-import {DateTime} from "luxon";
 
 class App extends Component {
+    state = {
+        loggedIn: false
+    };
+
     componentWillMount() {
-        store.dispatch(setDate(DateTime.local()));
+        const game = localStorage.getItem('game');
+        const loggedIn = !(game === null);
+        this.setState({loggedIn});
     }
 
     render() {
+        const {loggedIn} = this.state;
         return (
             <Provider store={store}>
                 <div className="App">
                     <Header/>
                     <Container>
                         <Card fluid>
-                            <MainScreen/>
+                            {!loggedIn && (<Login/>)}
+                            {loggedIn && (<MainScreen/>)}
                         </Card>
                     </Container>
                 </div>
