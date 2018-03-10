@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Container, Dropdown, Form, Menu} from "semantic-ui-react";
+import {Button, Container, Dropdown, Form, Icon, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {DateTime} from "luxon";
 import {ucFirst} from 'uvk';
@@ -96,7 +96,7 @@ class LoginView extends Component {
                             disabled={this.isFormInvalid()}
                             onClick={() => this.newGame()}
                         >
-                            Submit
+                            Start <Icon name="step forward"/>
                         </Button>
                     </Menu.Menu>
                 </Menu>
