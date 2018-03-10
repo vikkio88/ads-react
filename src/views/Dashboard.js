@@ -52,15 +52,13 @@ class DashboardView extends Component {
                 </Grid>
                 <Menu secondary>
                     <Menu.Menu position="right">
-                        <Menu.Item>
-                            <Button
-                                fluid
-                                size="massive"
-                                onClick={() => nextDay(date)}
-                            >
-                                Next Day <Icon name="step forward"/>
-                            </Button>
-                        </Menu.Item>
+                        <Button
+                            fluid
+                            size="massive"
+                            onClick={() => nextDay(date)}
+                        >
+                            Next Day <Icon name="step forward"/>
+                        </Button>
                     </Menu.Menu>
                 </Menu>
             </div>
