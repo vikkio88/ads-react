@@ -1,22 +1,38 @@
 import React, {Component} from 'react';
-import {Button, Container, Form} from "semantic-ui-react";
+import {Button, Container, Dropdown, Form, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {DateTime} from "luxon";
 import {ucFirst} from 'uvk';
 
 import {newGame} from "../store/actions";
+import {nationalities} from "../const";
+
+const formattedNationalities = nationalities.map(n => {
+    const {flag, name} = n;
+    return {
+        flag,
+        key: flag,
+        value: flag,
+        text: name
+    };
+});
 
 class LoginView extends Component {
     state = {
         player: {
             name: '',
             surname: '',
+            nationality: null,
+            fame: 0
         },
-        date: DateTime.local()
+        job: null,
+        messages: [],
+        news: [],
+        date: DateTime.local(),
+        context: null,
     };
 
     updatePlayerField(field, value) {
-        value = ucFirst(value);
         this.setState({
             player: {
                 ...this.state.player,
@@ -25,8 +41,20 @@ class LoginView extends Component {
         })
     }
 
+    isFormInvalid() {
+        const {player, context} = this.state;
+        return (player.name.length < 3 || player.surname.length < 3)
+            || (player.nationality === null) || !context
+    }
+
+    newGame() {
+        this.props.newGame({...this.state});
+    }
+
+
     render() {
-        const {name, surname} = this.state.player;
+        const {name, surname, nationality} = this.state.player;
+        console.log(this.state.player);
         return (
             <Container textAlign="center">
                 <h1>Athletic Director Simulator</h1>
@@ -37,7 +65,7 @@ class LoginView extends Component {
                         <input
                             placeholder='Mario'
                             value={name}
-                            onChange={e => this.updatePlayerField('name', e.target.value)}
+                            onChange={e => this.updatePlayerField('name', ucFirst(e.target.value))}
                         />
                     </Form.Field>
                     <Form.Field>
@@ -45,11 +73,33 @@ class LoginView extends Component {
                         <input
                             placeholder='Mario'
                             value={surname}
-                            onChange={e => this.updatePlayerField('surname', e.target.value)}
+                            onChange={e => this.updatePlayerField('surname', ucFirst(e.target.value))}
                         />
                     </Form.Field>
-                    <Button disabled={!name || !surname} onClick={() => this.props.newGame(this.state)}>Submit</Button>
+                    <Form.Field>
+                        <label>Nationality</label>
+                        <Dropdown
+                            selection
+                            placeholder='Select your country'
+                            options={formattedNationalities}
+                            selectOnNavigation={false}
+                            onChange={(e, {value}) => this.updatePlayerField('nationality', value)}
+                        />
+                    </Form.Field>
+                    <Button disabled={!nationality}>Generate teams</Button>
                 </Form>
+                <Menu>
+                    <Menu.Menu position="right">
+                        <Button
+                            size="massive"
+                            fluid
+                            disabled={this.isFormInvalid()}
+                            onClick={() => this.newGame()}
+                        >
+                            Submit
+                        </Button>
+                    </Menu.Menu>
+                </Menu>
             </Container>
         );
     }
