@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {Dashboard, Mail, News, Calendar} from './';
+import {Dashboard, Mail, News, Calendar, Database} from './';
 import {navigate} from "../store/actions";
 import {Button, Grid, Icon} from "semantic-ui-react";
 
@@ -8,6 +8,7 @@ const componentMap = {
     'mail': <Mail/>,
     'news': <News/>,
     'calendar': <Calendar/>,
+    'database': <Database />,
 };
 
 
