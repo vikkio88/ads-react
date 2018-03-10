@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Container, Form} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {DateTime} from "luxon";
+import {ucFirst} from 'uvk';
 
 import {newGame} from "../store/actions";
 
@@ -11,10 +12,11 @@ class LoginView extends Component {
             name: '',
             surname: '',
         },
-        date: DateTime.local(DateTime.local().toFormat("yyyy"), 6, 1)
+        date: DateTime.local()
     };
 
     updatePlayerField(field, value) {
+        value = ucFirst(value);
         this.setState({
             player: {
                 ...this.state.player,
@@ -58,8 +60,8 @@ const stateToProps = () => {
 };
 const dispatchToProps = dispatch => {
     return {
-        newGame() {
-            dispatch(newGame());
+        newGame(details) {
+            dispatch(newGame(details));
         }
     };
 };

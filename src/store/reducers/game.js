@@ -1,4 +1,5 @@
 import {NEW_GAME, SET_DATE} from '../actions';
+import {LOAD_GAME} from "../actions/game";
 
 const initialState = {
     date: null,
@@ -10,6 +11,11 @@ const initialState = {
 
 export const game = (state = initialState, action) => {
     switch (action.type) {
+        case LOAD_GAME: {
+            return {
+                ...action.data
+            }
+        }
         case NEW_GAME:
         case SET_DATE: {
             return {
