@@ -23,7 +23,7 @@ const SimpleList = ({teams}) => {
             </Table.Header>
             <Table.Body>
                 {teams.map(t => (
-                    <Table.Row key={t.name}>
+                    <Table.Row key={t.id}>
                         <Table.Cell>
                             <Badge colours={t.colours}/>
                         </Table.Cell>

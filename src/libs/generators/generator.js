@@ -7,6 +7,7 @@ import {teamNames} from '../../config/providers/teamDefinitions';
 import {playerHelper, coachHelper} from '../helpers';
 import {CURRENCY_MODIFIERS, COLOURS} from "../../const";
 import {COACH_AGE_RANGE, PLAYER_AGE_RANGE, SKILL_RANGE} from "../../config";
+import {ulid} from "ulid";
 
 
 const generator = {
@@ -57,6 +58,7 @@ const generator = {
     },
     person(locale) {
         return {
+            id: ulid(),
             name: faker.name(locale),
             surname: faker.surname(locale),
             team: null,
@@ -107,10 +109,10 @@ const generator = {
     },
     team(forcedValues = {}) {
         const rosterSize = randomizer.int(18, 29);
-        const name = this.teamName(nationality);
-        const mostPlayers = Math.round(rosterSize * (1 - 0.8));
-
         const nationality = forcedValues.nationality || 'it';
+        const name = this.teamName(nationality);
+
+        const mostPlayers = Math.round(rosterSize * (1 - 0.8));
         const roster = this.players(mostPlayers, {nationality, team: name});
         roster.push(this.player({position: 'GK', nationality, team: name}));
         range(rosterSize - mostPlayers).forEach(() => {
@@ -118,6 +120,7 @@ const generator = {
         });
         const coachNationality = randomizer.chance(90) ? nationality : this.nationality();
         return {
+            id: ulid(),
             name,
             colours: this.teamColour(),
             status: this.status(),

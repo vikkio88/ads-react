@@ -15,7 +15,7 @@ const formattedNationalities = nationalitiesArray.map(n => {
     return {
         flag,
         key: flag,
-        value: flag,
+        value: flag !== 'gb' ? flag : 'en',
         text: name
     };
 });
@@ -51,7 +51,8 @@ class LoginView extends Component {
     }
 
     generateLeague() {
-        const teams = generator.teams(TEAM_NUMBER);
+        const {nationality} = this.state.player;
+        const teams = generator.teams(TEAM_NUMBER, {nationality});
         let {context} = this.state;
         context = {
             ...context,

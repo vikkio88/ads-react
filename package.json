@@ -12,6 +12,7 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.14",
     "semantic-ui-react": "0.78.3",
+    "ulid": "^2.3.0",
     "uvk": "^1.0.2"
   },
   "devDependencies": {
