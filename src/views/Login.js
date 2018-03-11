@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import moment from "moment";
 import {Button, Container, Dropdown, Form, Icon, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
-import {DateTime} from "luxon";
 import {ucFirst} from 'uvk';
 
 import {newGame} from "../store/actions";
-import {nationalities} from "../const";
+import {nationalitiesArray} from "../const";
+import {generator} from "../libs/generator";
 
-const formattedNationalities = nationalities.map(n => {
+const formattedNationalities = nationalitiesArray.map(n => {
     const {flag, name} = n;
     return {
         flag,
@@ -28,7 +29,7 @@ class LoginView extends Component {
         job: null,
         messages: [],
         news: [],
-        date: DateTime.local(),
+        date: moment(),
         context: null,
     };
 
@@ -86,7 +87,7 @@ class LoginView extends Component {
                             onChange={(e, {value}) => this.updatePlayerField('nationality', value)}
                         />
                     </Form.Field>
-                    <Button disabled={!nationality}>Generate teams</Button>
+                    <Button disabled={!nationality} onClick={() => console.log(generator.teams())}>Generate teams</Button>
                 </Form>
                 <Menu>
                     <Menu.Menu position="right">

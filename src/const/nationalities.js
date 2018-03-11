@@ -52,6 +52,7 @@ const extendedNationalities = {
 
 };
 
-const nationalities = Object.keys(extendedNationalities).map(k => extendedNationalities[k]);
+const nationalities = Object.keys(extendedNationalities).map(k => k);
+const nationalitiesArray = Object.keys(extendedNationalities).map(k => extendedNationalities[k]);
 
-export {extendedNationalities, nationalities};
+export {extendedNationalities, nationalities, nationalitiesArray};

@@ -3,6 +3,7 @@ import {Button, Grid, Icon, Menu} from "semantic-ui-react";
 import {AppIcon} from "../components";
 import {connect} from "react-redux";
 import {nextDay} from "../store/actions";
+import {DATE_FORMAT} from "../const";
 
 const apps = [
     {
@@ -44,7 +45,7 @@ class DashboardView extends Component {
                         <h2>{player && `${player.name} ${player.surname}`}</h2>
                     </Menu.Menu>
                     <Menu.Menu position="right">
-                        <h2>{date && date.toFormat('dd  LLL yyyy')}</h2>
+                        <h2>{date && date.format(DATE_FORMAT)}</h2>
                     </Menu.Menu>
                 </Menu>
                 <Grid columns={3} doubling>

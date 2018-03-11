@@ -20,7 +20,7 @@ export const newGame = data => {
 };
 
 export const nextDay = date => {
-    date = date.plus({days: 1});
+    date = date.add(1, 'days');
     return {
         type: SET_DATE,
         data: {
