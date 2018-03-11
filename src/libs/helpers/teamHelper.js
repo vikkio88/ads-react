@@ -1,5 +1,4 @@
 import {randomizer, range} from 'uvk';
-import {formatCurrency} from '../utils';
 import {extendedModules} from '../../const';
 import {positions} from '../../const';
 import {byPlayerAbilityToScore} from "../utils";

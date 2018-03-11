@@ -74,7 +74,7 @@ const leagueHelper = {
         results.forEach(r => {
             const {home, away, scorers} = r;
             scorers.home.forEach(s => {
-                const playerKey = `${s.name}${s.surname}`;
+                const playerKey = s.id;
                 if (oldScorers[playerKey]) {
                     oldScorers[playerKey].goals += 1;
                     oldScorers[playerKey].team = home;
@@ -88,7 +88,7 @@ const leagueHelper = {
             });
 
             scorers.away.forEach(s => {
-                const playerKey = `${s.name}${s.surname}`;
+                const playerKey = s.id;
                 if (oldScorers[playerKey]) {
                     oldScorers[playerKey].goals += 1;
                     oldScorers[playerKey].team = away;
