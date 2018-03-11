@@ -9,11 +9,11 @@ const extendedNationalities = {
         flag: 'gb',
         currency: '£'
     },
-    'ru': {
+    /*'ru': {
         name: 'Russia',
         flag: 'ru',
         currency: '€'
-    },
+    },*/
     'es': {
         name: 'Spain',
         flag: 'es',
@@ -34,11 +34,11 @@ const extendedNationalities = {
         flag: 'fr',
         currency: '€'
     },
-    'ja': {
+    /*'ja': {
         name: 'Japan',
         flag: 'jp',
         currency: '¥'
-    },
+    },*/
     'nl': {
         name: 'Netherlands',
         flag: 'nl',

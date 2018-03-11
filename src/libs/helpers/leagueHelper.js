@@ -1,12 +1,11 @@
-import {generator} from '../generator';
+import moment from "moment";
+import {generator} from '../generators';
 import {playerHelper} from './playerHelper';
 import {teamHelper} from './teamHelper';
-import {round} from '../';
-import {newsGenerator} from '../game/news';
+import {round} from '../simulators';
+import {newsGenerator} from './newshelper';
 import {DATE_FORMAT} from '../../const';
-import moment from "moment";
-import {bold, tableFactory} from "../game/cli";
-import {tableOrdering} from "../../utils";
+import {tableOrdering} from "../utils";
 
 const LOSER_MODIFIERS = {
     decreases: [
@@ -144,28 +143,14 @@ const leagueHelper = {
             leagueHelper.parseScorers(results, scorers);
             todayRound.played = true;
             todayRound.results = results;
-            const resultTable = tableFactory(['Home', 'Away', 'Result']);
-            results.forEach(r => {
-                let {home, away} = r;
-                if (home === currentTeam) {
-                    home = bold(home);
-                    playerTeamMatch = r;
-                }
-
-                if (away === currentTeam) {
-                    away = bold(away);
-                    playerTeamMatch = r;
-                }
-                resultTable.push([home, away, `${r.homeGoal} - ${r.awayGoal}`]);
-            });
-
             leagueHelper.updateStatus(results, teams.hash);
             leagueHelper.updateStats(teams.hash, {table});
 
             news.push(
                 newsGenerator.generate(
                     `Round ${todayRound.index + 1} played`,
-                    `Results:\n${resultTable.toString()}`,
+                    `Results`,
+                    results,
                     date.format(DATE_FORMAT)
                 )
             );

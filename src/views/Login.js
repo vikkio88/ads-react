@@ -6,7 +6,7 @@ import {ucFirst} from 'uvk';
 
 import {newGame} from "../store/actions";
 import {nationalitiesArray} from "../const";
-import {generator} from "../libs/generator";
+import {generator} from "../libs/generators";
 
 const formattedNationalities = nationalitiesArray.map(n => {
     const {flag, name} = n;

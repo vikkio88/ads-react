@@ -1,4 +1,4 @@
-import {randomizer} from '../generator/randomizer';
+import {randomizer} from '../generators/randomizer';
 
 const PRICE_MULTIPLIER = 1000000;
 const MIN_PRICE = 0.01;

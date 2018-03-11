@@ -1,5 +1,5 @@
 import {randomizer, range, format} from 'uvk';
-import {faker} from '../generator/faker';
+import {faker} from '../generators/faker';
 import {nationalities} from '../../const/nationalities';
 import {positions} from '../../const/positions';
 import {modules} from '../../const/modules';

@@ -1,8 +1,8 @@
-import {randomizer} from '../generator/randomizer';
-import {formatCurrency, range} from '../../utils';
-import {extendedModules} from '../../config/modules';
-import {positions} from '../../config/positions';
-import {byPlayerAbilityToScore} from "../misc";
+import {randomizer, range} from 'uvk';
+import {formatCurrency} from '../utils';
+import {extendedModules} from '../../const';
+import {positions} from '../../const';
+import {byPlayerAbilityToScore} from "../utils";
 
 const teamHelper = {
     createCleanTable(teams) {

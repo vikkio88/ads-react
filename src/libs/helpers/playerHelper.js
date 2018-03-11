@@ -1,4 +1,4 @@
-import {randomizer} from '../generator/randomizer';
+import {randomizer} from '../generators/randomizer';
 
 const MIN_MORALE = 0;
 const MAX_MORALE = 100;
