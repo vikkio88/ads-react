@@ -110,7 +110,7 @@ const generator = {
     team(forcedValues = {}) {
         const rosterSize = randomizer.int(18, 29);
         const nationality = forcedValues.nationality || 'it';
-        const name = this.teamName(nationality);
+        const name = forcedValues.name || this.teamName(nationality);
 
         const mostPlayers = Math.round(rosterSize * (1 - 0.8));
         const roster = this.players(mostPlayers, {nationality, team: name});
@@ -132,7 +132,13 @@ const generator = {
         }
     },
     teams(number = 8, forcedValues = {}) {
-        return range(number).map(() => this.team(forcedValues));
+        const names = [];
+        while (names.length < number) {
+            const name = this.teamName(forcedValues.nationality || 'it');
+            if (names.indexOf(names) < 0) names.push(name);
+        }
+
+        return names.map(name => this.team({name, ...forcedValues}));
     },
     teamColour() {
         const firstColour = randomizer.pickOne(COLOURS);
