@@ -6,7 +6,6 @@ import newspapers from '../../config/providers/newspapers';
 
 const faker = {
     name(locale) {
-        console.log(locale);
         return randomizer.pickOne(person[locale].names);
     },
     surname(locale) {

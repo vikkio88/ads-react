@@ -5,8 +5,10 @@ import {connect} from "react-redux";
 import {ucFirst} from 'uvk';
 
 import {newGame} from "../store/actions";
-import {nationalitiesArray} from "../const";
+import {nationalitiesArray, TEAM_NUMBER} from "../const";
 import {generator} from "../libs/generators";
+import {teamHelper} from "../libs/helpers/teamHelper";
+import {SimpleList} from "../components/teams";
 
 const formattedNationalities = nationalitiesArray.map(n => {
     const {flag, name} = n;
@@ -48,6 +50,24 @@ class LoginView extends Component {
             || (player.nationality === null) || !context
     }
 
+    generateLeague() {
+        const teams = generator.teams(TEAM_NUMBER);
+        let {context} = this.state;
+        context = {
+            ...context,
+            teams: {
+                hash: teamHelper.teamsToObject(teams),
+                list: teams
+            },
+            league: {
+                table: teamHelper.createCleanTable(teams),
+                fixture: [],
+                scorers: {}
+            }
+        };
+        this.setState({context});
+    }
+
     newGame() {
         this.props.newGame({...this.state});
     }
@@ -55,7 +75,7 @@ class LoginView extends Component {
 
     render() {
         const {name, surname, nationality} = this.state.player;
-        console.log(this.state.player);
+        const teams = ((this.state.context || {}).teams || {}).list || [];
         return (
             <Container textAlign="center">
                 <h1>Athletic Director Simulator</h1>
@@ -87,7 +107,10 @@ class LoginView extends Component {
                             onChange={(e, {value}) => this.updatePlayerField('nationality', value)}
                         />
                     </Form.Field>
-                    <Button disabled={!nationality} onClick={() => console.log(generator.teams())}>Generate teams</Button>
+                    <Button disabled={!nationality} onClick={() => this.generateLeague()}>
+                        Generate teams
+                    </Button>
+                    <SimpleList teams={teams}/>
                 </Form>
                 <Menu>
                     <Menu.Menu position="right">

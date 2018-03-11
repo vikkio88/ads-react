@@ -7,7 +7,7 @@ export const tableOrdering = field => {
 };
 const formatCurrency = (number, currency = '€') => `${numeral(number).format('(0.00 a)')} ${currency}`;
 
-
+export const valueToRating = (value, max = 100, maxStart = 5) => value * maxStart / max;
 
 
 // Teams
