@@ -4,6 +4,7 @@ import {Dashboard, Mail, News, Calendar, Database} from './';
 import {Button, Grid, Icon} from "semantic-ui-react";
 import {Login} from "./Login";
 import {Details as TeamDetails} from "../components/teams";
+import {Details as PlayerDetails} from "../components/players";
 import {navigatePop} from "../store/actions";
 
 const componentMap = {
@@ -11,7 +12,9 @@ const componentMap = {
     'news': <News/>,
     'calendar': <Calendar/>,
     'database': <Database/>,
-    'teamDetails': <TeamDetails/>
+
+    'teamDetails': <TeamDetails/>,
+    'playerDetails': <PlayerDetails/>
 };
 
 
