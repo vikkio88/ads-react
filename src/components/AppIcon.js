@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {Segment, Grid, Icon, Button} from "semantic-ui-react";
+import {Segment, Grid, Icon, Button, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {navigate} from "../store/actions/navigation";
 
 class AppIconView extends Component {
     render() {
-        const {icon, label, name} = this.props;
+        const {icon, label, name, notifications} = this.props;
         return (
             <Grid.Column>
                 <Segment>
@@ -16,6 +16,7 @@ class AppIconView extends Component {
                     >
                         <Icon name={icon}/>
                         {`${label}`}
+                        {notifications && <Label color='red' floating>{notifications}</Label>}
                     </Button>
                 </Segment>
             </Grid.Column>

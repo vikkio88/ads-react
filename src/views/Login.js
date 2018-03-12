@@ -78,42 +78,44 @@ class LoginView extends Component {
         const {name, surname, nationality} = this.state.player;
         const teams = ((this.state.context || {}).teams || {}).list || [];
         return (
-            <Container textAlign="center">
-                <h1>Athletic Director Simulator</h1>
-                <h3>Insert your details</h3>
-                <Form>
-                    <Form.Field>
-                        <label>Name</label>
-                        <input
-                            placeholder='Mario'
-                            value={name}
-                            onChange={e => this.updatePlayerField('name', ucFirst(e.target.value))}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Surname</label>
-                        <input
-                            placeholder='Mario'
-                            value={surname}
-                            onChange={e => this.updatePlayerField('surname', ucFirst(e.target.value))}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Nationality</label>
-                        <Dropdown
-                            selection
-                            placeholder='Select your country'
-                            options={formattedNationalities}
-                            selectOnNavigation={false}
-                            onChange={(e, {value}) => this.updatePlayerField('nationality', value)}
-                        />
-                    </Form.Field>
-                    <Button disabled={!nationality} onClick={() => this.generateLeague()}>
-                        Generate teams
-                    </Button>
-                    <SimpleList teams={teams}/>
-                </Form>
-                <Menu>
+            <div>
+                <Container textAlign="center">
+                    <h1>Athletic Director Simulator</h1>
+                    <h3>Insert your details</h3>
+                    <Form>
+                        <Form.Field>
+                            <label>Name</label>
+                            <input
+                                placeholder='Mario'
+                                value={name}
+                                onChange={e => this.updatePlayerField('name', ucFirst(e.target.value))}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Surname</label>
+                            <input
+                                placeholder='Mario'
+                                value={surname}
+                                onChange={e => this.updatePlayerField('surname', ucFirst(e.target.value))}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Nationality</label>
+                            <Dropdown
+                                selection
+                                placeholder='Select your country'
+                                options={formattedNationalities}
+                                selectOnNavigation={false}
+                                onChange={(e, {value}) => this.updatePlayerField('nationality', value)}
+                            />
+                        </Form.Field>
+                        <Button disabled={!nationality} onClick={() => this.generateLeague()}>
+                            Generate teams
+                        </Button>
+                        <SimpleList teams={teams}/>
+                    </Form>
+                </Container>
+                <Menu borderless fluid>
                     <Menu.Menu position="right">
                         <Button
                             size="massive"
@@ -125,7 +127,7 @@ class LoginView extends Component {
                         </Button>
                     </Menu.Menu>
                 </Menu>
-            </Container>
+            </div>
         );
     }
 }

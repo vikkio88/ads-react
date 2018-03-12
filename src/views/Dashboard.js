@@ -9,7 +9,8 @@ const apps = [
     {
         name: "mail",
         icon: "mail outline",
-        label: "Mail"
+        label: "Mail",
+        notifications: 1
     },
     {
         name: "news",
@@ -40,17 +41,19 @@ class DashboardView extends Component {
         const {player, date} = game;
         return (
             <div>
-                <Menu>
-                    <Menu.Menu position="left">
-                        <h2>{player && `${player.name} ${player.surname}`}</h2>
-                    </Menu.Menu>
-                    <Menu.Menu position="right">
-                        <h2>{date && date.format(DATE_FORMAT)}</h2>
-                    </Menu.Menu>
-                </Menu>
-                <Grid columns={3} doubling>
-                    {this.renderApps()}
-                </Grid>
+                <div className="appView">
+                    <Menu>
+                        <Menu.Menu position="left">
+                            <h2>{player && `${player.name} ${player.surname}`}</h2>
+                        </Menu.Menu>
+                        <Menu.Menu position="right">
+                            <h2>{date && date.format(DATE_FORMAT)}</h2>
+                        </Menu.Menu>
+                    </Menu>
+                    <Grid columns={3} doubling>
+                        {this.renderApps()}
+                    </Grid>
+                </div>
                 <Menu secondary>
                     <Menu.Menu position="right">
                         <Button

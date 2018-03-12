@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Dashboard, Mail, News, Calendar, Database} from './';
-import {navigate} from "../store/actions";
 import {Button, Grid, Icon} from "semantic-ui-react";
 import {Login} from "./Login";
+import {Details as TeamDetails} from "../components/teams";
+import {navigatePop} from "../store/actions";
 
 const componentMap = {
     'mail': <Mail/>,
     'news': <News/>,
     'calendar': <Calendar/>,
     'database': <Database/>,
+    'teamDetails': <TeamDetails/>
 };
 
 
@@ -19,18 +21,18 @@ class MainScreenView extends Component {
         const {loggedIn} = this.props;
         if (viewComponent) {
             return (
-                <div className="appView">
-                    <Grid centered stretched columns={1} doubling>
-                        <Grid.Row>
-                            <Button fluid onClick={() => this.props.back()} size="massive">
-                                <Icon name="step backward"/> Back
-                            </Button>
-                        </Grid.Row>
-                        <Grid.Row>
+                <Grid centered stretched columns={1} doubling>
+                    <Grid.Row>
+                        <Button fluid onClick={() => this.props.back()} size="massive">
+                            <Icon name="step backward"/> Back
+                        </Button>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <div className="appView">
                             {viewComponent}
-                        </Grid.Row>
-                    </Grid>
-                </div>
+                        </div>
+                    </Grid.Row>
+                </Grid>
             );
         }
 
@@ -42,7 +44,7 @@ class MainScreenView extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         back() {
-            dispatch(navigate('dashboard'))
+            dispatch(navigatePop())
         }
     };
 };
