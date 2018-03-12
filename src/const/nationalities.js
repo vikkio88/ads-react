@@ -5,7 +5,7 @@ const extendedNationalities = {
         currency: '€'
     },
     'en': {
-        name: 'England',
+        name: 'United Kingdom',
         flag: 'gb',
         currency: '£'
     },

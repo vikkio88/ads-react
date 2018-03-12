@@ -1,11 +1,11 @@
 import React from 'react';
-import {Rating, Table} from "semantic-ui-react";
+import {Button, Icon, Rating, Table} from "semantic-ui-react";
 import {Badge} from "../";
 import {teamHelper} from "../../../libs/helpers";
 import {CURRENCY_MODIFIERS} from "../../../const";
 import {valueToRating} from "../../../libs/utils";
 
-const SimpleList = ({teams}) => {
+const SimpleList = ({teams, detailed}) => {
     if (!teams.length) {
         return <div/>;
     }
@@ -19,6 +19,7 @@ const SimpleList = ({teams}) => {
                     <Table.HeaderCell>Average Skill</Table.HeaderCell>
                     <Table.HeaderCell>Average Age</Table.HeaderCell>
                     <Table.HeaderCell>Finances</Table.HeaderCell>
+                    {detailed && (<Table.HeaderCell>Details</Table.HeaderCell>)}
                 </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -46,6 +47,13 @@ const SimpleList = ({teams}) => {
                                 maxRating={5}
                             />
                         </Table.Cell>
+                        {detailed && (
+                            <Table.Cell>
+                                <Button onClick={() => console.log(t)}>
+                                    <Icon name="magnify"/>
+                                </Button>
+                            </Table.Cell>
+                        )}
                     </Table.Row>
                 ))}
             </Table.Body>

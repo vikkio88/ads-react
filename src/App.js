@@ -15,12 +15,12 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <div className="App">
-                    <Header/>
-                    <Container>
-                        <Card fluid>
+                    <Card fluid>
+                        <Container fluid>
+                            <Header/>
                             <MainScreen/>
-                        </Card>
-                    </Container>
+                        </Container>
+                    </Card>
                 </div>
             </Provider>
         );
