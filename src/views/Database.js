@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {SimpleList} from "../components/teams";
+import {SimpleList} from "../components/team";
 
 class DatabaseView extends Component {
     render() {

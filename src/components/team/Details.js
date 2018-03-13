@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Container, Segment} from "semantic-ui-react";
 import {Badge} from "./misc/Badge";
+import {SimpleList} from "../player/list/SimpleList";
 
 class DetailsView extends Component {
     render() {
@@ -16,7 +17,8 @@ class DetailsView extends Component {
                             coach
                         </Segment>
                         <Segment>
-                            roster
+                            <h3>Roster</h3>
+                            <SimpleList roster={team.roster}/>
                         </Segment>
                     </Segment.Group>
                 </Segment.Group>

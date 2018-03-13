@@ -8,7 +8,7 @@ import {newGame} from "../store/actions";
 import {nationalitiesArray, TEAM_NUMBER} from "../const";
 import {generator} from "../libs/generators";
 import {teamHelper} from "../libs/helpers/teamHelper";
-import {SimpleList} from "../components/teams";
+import {SimpleList} from "../components/team";
 
 const formattedNationalities = nationalitiesArray.map(n => {
     const {flag, name} = n;
