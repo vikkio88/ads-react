@@ -23,13 +23,15 @@ export const navigation = (state = initialState, action) => {
             return {
                 ...state,
                 view,
-                payload: action.data.payload
+                payload: action.data.payload,
+                stack
             }
         }
         case NAVIGATE_POP: {
             const {stack} = state;
-            const view = (stack.pop() || {}).view || 'dashboard';
-            const payload = (stack.pop() || {}).payload || {};
+            const lastView = stack.pop() || {};
+            const view = lastView.view || 'dashboard';
+            const payload = lastView.payload || {};
             return {
                 ...state,
                 view,
