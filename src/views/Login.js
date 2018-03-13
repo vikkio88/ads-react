@@ -29,6 +29,7 @@ class LoginView extends Component {
             fame: 0
         },
         job: null,
+        team: null,
         messages: [],
         news: [],
         date: moment(),

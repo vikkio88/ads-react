@@ -1,5 +1,4 @@
-import {NAVIGATE} from '../actions';
-import {NAVIGATE_POP, NAVIGATE_PUSH} from "../actions/navigation";
+import {NAVIGATE, NAVIGATE_POP, NAVIGATE_PUSH} from '../actions';
 
 const initialState = {
     view: 'dashboard',

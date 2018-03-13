@@ -1,11 +1,11 @@
-//import numeral from 'numeral';
+import numeral from 'numeral';
 import {teamHelper} from "../helpers/teamHelper";
 import {extendedPositions} from "../../const";
 
 export const tableOrdering = field => {
     return (row1, row2) => row1[field] < row2[field] ? 1 : -1;
 };
-//const formatCurrency = (number, currency = '€') => `${numeral(number).format('(0.00 a)')} ${currency}`;
+export const formatCurrency = (number, currency = '€') => `${numeral(number).format('(0.00 a)')} ${currency}`;
 
 export const valueToRating = (value, max = 100, maxStart = 5) => value * maxStart / max;
 
