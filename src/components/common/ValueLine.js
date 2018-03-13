@@ -1,15 +1,23 @@
 import React from 'react';
-import {Segment} from "semantic-ui-react";
+import {Table} from "semantic-ui-react";
 
 const ValueLine = ({label, value}) => (
-    <Segment.Group horizontal>
-        <Segment>
-            <strong>{label}</strong>
-        </Segment>
-        <Segment>
+    <Table.Row>
+        <Table.Cell>
+            {label}
+        </Table.Cell>
+        <Table.Cell>
             {`${value}`}
-        </Segment>
-    </Segment.Group>
+        </Table.Cell>
+    </Table.Row>
+);
+
+ValueLine.Group = ({children}) => (
+    <Table definition>
+        <Table.Body>
+            {children}
+        </Table.Body>
+    </Table>
 );
 
 
