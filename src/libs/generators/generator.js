@@ -111,16 +111,16 @@ const generator = {
         const rosterSize = randomizer.int(18, 29);
         const nationality = forcedValues.nationality || 'it';
         const name = forcedValues.name || this.teamName(nationality);
-
+        const id = ulid();
         const mostPlayers = Math.round(rosterSize * (1 - 0.8));
-        const roster = this.players(mostPlayers, {nationality, team: name});
-        roster.push(this.player({position: 'GK', nationality, team: name}));
+        const roster = this.players(mostPlayers, {nationality, team: {id, name}});
+        roster.push(this.player({position: 'GK', nationality, team: {id, name}}));
         range(rosterSize - mostPlayers).forEach(() => {
-            roster.push(this.player({nationality: this.nationality(), team: name}));
+            roster.push(this.player({nationality: this.nationality(), team: {id, name}}));
         });
         const coachNationality = randomizer.chance(90) ? nationality : this.nationality();
         return {
-            id: ulid(),
+            id,
             name,
             colours: this.teamColour(),
             status: this.status(),

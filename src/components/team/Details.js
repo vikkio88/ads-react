@@ -2,22 +2,31 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Container, Segment} from "semantic-ui-react";
 import {Badge} from "./misc/Badge";
-import {SimpleList} from "../player/list/SimpleList";
+import {SimpleList} from "../player";
+import {Details as CoachDetails} from "../coach";
+import {AdsFlag} from "../common";
 
 class DetailsView extends Component {
     render() {
         const {team} = this.props;
+        let {coach} = team;
+        coach = coach || {};
         console.log(team);
         return (
             <Container fluid>
                 <Segment.Group>
-                    <Segment><Badge colours={team.colours}/><h1>{team.name}</h1></Segment>
+                    <Segment>
+                        <Badge colours={team.colours}/>
+                        <h1><AdsFlag name={team.nationality}/> {team.name}</h1>
+                    </Segment>
                     <Segment.Group>
                         <Segment>
-                            coach
+                            <h2>Coach</h2>
+                            {coach && <CoachDetails coach={coach}/>}
+                            {!coach && <h1>-</h1>}
                         </Segment>
                         <Segment>
-                            <h3>Roster</h3>
+                            <h2>Roster</h2>
                             <SimpleList roster={team.roster}/>
                         </Segment>
                     </Segment.Group>

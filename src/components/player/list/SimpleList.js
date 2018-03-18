@@ -4,6 +4,7 @@ import {extendedPositions} from "../../../const";
 import {valueToRating} from "../../../libs/utils";
 import {connect} from "react-redux";
 import {navigatePush} from "../../../store/actions";
+import {AdsFlag} from "../../common";
 
 class SimpleListView extends Component {
     render() {
@@ -30,7 +31,7 @@ class SimpleListView extends Component {
                             <Table.Cell/>
                             <Table.Cell>{`${p.name} ${p.surname}`}</Table.Cell>
                             <Table.Cell>
-                                <Flag name={p.nationality === 'en' ? 'gb' : p.nationality}/>
+                                <AdsFlag name={p.nationality}/>
                             </Table.Cell>
                             <Table.Cell>{p.age}</Table.Cell>
                             <Table.Cell>{extendedPositions[p.position].description}</Table.Cell>

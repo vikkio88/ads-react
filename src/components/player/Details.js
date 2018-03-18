@@ -8,7 +8,6 @@ import {formatCurrency, percentageToColour, valueToRating} from "../../libs/util
 class DetailsView extends Component {
     render() {
         const {player, inPlayersTeam} = this.props;
-        console.log(player);
         return (
             <Container fluid>
                 <Segment.Group>
