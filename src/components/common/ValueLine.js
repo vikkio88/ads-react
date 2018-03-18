@@ -7,7 +7,7 @@ const ValueLine = ({label, value}) => (
             {label}
         </Table.Cell>
         <Table.Cell>
-            {`${value}`}
+            {typeof value === 'object' ? value : <h2>{`${value}`}</h2>}
         </Table.Cell>
     </Table.Row>
 );

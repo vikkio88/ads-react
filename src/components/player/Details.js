@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {Container, Flag, Segment} from "semantic-ui-react";
+import {Container, Flag, Progress, Rating, Segment} from "semantic-ui-react";
 import {ValueLine} from "../common";
 import {extendedPositions} from "../../const";
-import {formatCurrency} from "../../libs/utils";
+import {formatCurrency, percentageToColour, valueToRating} from "../../libs/utils";
 
 class DetailsView extends Component {
     render() {
@@ -18,7 +18,23 @@ class DetailsView extends Component {
                         <ValueLine label="Age" value={player.age}/>
                         <ValueLine label="Position" value={extendedPositions[player.position].description}/>
                         <ValueLine label="Value" value={formatCurrency(player.value)}/>
-                        {inPlayersTeam && <ValueLine label={"Morale"} value={player.status.morale}/>}
+                        {!inPlayersTeam && (
+                            <ValueLine
+                                label={"Skill"}
+                                value={(
+                                    <Rating
+                                        icon="star"
+                                        disabled
+                                        defaultRating={valueToRating(player.skill)}
+                                        maxRating={5}
+                                    />
+                                )}
+                            />)}
+
+                        {inPlayersTeam && <ValueLine label={"Skill"} value={player.skill}/>}
+                        {inPlayersTeam && <ValueLine label={"Morale"} value={(
+                            <Progress percent={player.status.morale} color={percentageToColour(player.status.morale)}/>
+                        )}/>}
                     </ValueLine.Group>
                 </Segment.Group>
             </Container>

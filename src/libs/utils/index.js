@@ -8,6 +8,23 @@ export const tableOrdering = field => {
 export const formatCurrency = (number, currency = '€') => `${numeral(number).format('(0.00 a)')} ${currency}`;
 
 export const valueToRating = (value, max = 100, maxStart = 5) => value * maxStart / max;
+export const percentageToColour = percentage => {
+    const mapping = {
+        80: 'green',
+        69: 'olive',
+        50: 'yellow',
+        40: 'orange',
+        0: 'red'
+    };
+    let colour = 'red';
+    Object.keys(mapping).forEach(limit => {
+        if (percentage > limit) {
+            colour = mapping[limit];
+        }
+    });
+
+    return colour;
+};
 
 
 // Teams
