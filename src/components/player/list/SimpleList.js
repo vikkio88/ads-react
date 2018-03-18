@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Flag, Icon, Rating, Table} from "semantic-ui-react";
+import {Button, Icon, Rating, Table} from "semantic-ui-react";
 import {extendedPositions} from "../../../const";
 import {valueToRating} from "../../../libs/utils";
 import {connect} from "react-redux";

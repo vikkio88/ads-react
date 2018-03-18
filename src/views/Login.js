@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import moment from "moment";
 import {Button, Container, Dropdown, Form, Icon, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {ucFirst} from 'uvk';
@@ -9,6 +8,7 @@ import {nationalitiesArray, TEAM_NUMBER} from "../const";
 import {generator} from "../libs/generators";
 import {teamHelper} from "../libs/helpers/teamHelper";
 import {SimpleList} from "../components/team";
+import {baseLeague} from "../libs/models";
 
 const formattedNationalities = nationalitiesArray.map(n => {
     const {flag, name} = n;
@@ -28,11 +28,6 @@ class LoginView extends Component {
             nationality: null,
             fame: 0
         },
-        job: null,
-        team: null,
-        messages: [],
-        news: [],
-        date: moment(),
         context: null,
     };
 
@@ -62,9 +57,8 @@ class LoginView extends Component {
                 list: teams
             },
             league: {
+                ...baseLeague,
                 table: teamHelper.createCleanTable(teams),
-                fixture: [],
-                scorers: {}
             }
         };
         this.setState({context});
