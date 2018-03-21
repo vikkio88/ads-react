@@ -2,11 +2,8 @@ import {NEW_GAME, SET_DATE} from '../actions';
 import {LOAD_GAME} from "../actions/game";
 
 const initialState = {
-    date: null,
-    player: {
-        name: "Mario",
-        surname: "Adinolfi",
-    },
+    status: {},
+    context: {}
 };
 
 export const game = (state = initialState, action) => {
@@ -16,8 +13,17 @@ export const game = (state = initialState, action) => {
                 ...action.data
             }
         }
-        case NEW_GAME:
         case SET_DATE: {
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    ...action.data
+                }
+            }
+        }
+        case NEW_GAME: {
+            console.log(action.data);
             return {
                 ...state,
                 ...action.data

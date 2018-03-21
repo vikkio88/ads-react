@@ -9,12 +9,11 @@ export const baseLeague = {
     scorers: {}
 };
 
-export const baseGameState = {
+export const baseGameStatus = {
     player: null,
     job: null,
     team: null,
     messages: [],
     news: [],
     date: null,
-    context: null
 };

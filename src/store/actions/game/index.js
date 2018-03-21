@@ -1,6 +1,6 @@
 import moment from "moment";
-import {baseGameState} from "../../../libs/models";
-import {BASE_DATES, YEAR} from "../../../const";
+import {baseGameStatus} from "../../../libs/models";
+import {BASE_DATES, DATE_FORMAT, YEAR} from "../../../const";
 
 export const NEW_GAME = 'new_game';
 export const LOAD_GAME = 'load_game';
@@ -17,10 +17,14 @@ export const loadGame = () => {
 };
 
 export const newGame = data => {
+    const {status, context} = data;
     data = {
-        ...baseGameState,
-        ...data,
-        date: moment(`${BASE_DATES.GAME_START}${moment().format(YEAR)}`)
+        status: {
+            ...baseGameStatus,
+            ...status,
+            date: moment(`${BASE_DATES.GAME_START}${moment().format(YEAR)}`, DATE_FORMAT)
+        },
+        context
     };
     return {
         type: NEW_GAME,

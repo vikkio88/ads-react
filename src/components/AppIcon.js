@@ -16,7 +16,7 @@ class AppIconView extends Component {
                     >
                         <Icon name={icon}/>
                         {`${label}`}
-                        {notifications && <Label color='red' floating>{notifications}</Label>}
+                        {notifications > 0 && <Label color='red' floating>{notifications}</Label>}
                     </Button>
                 </Segment>
             </Grid.Column>

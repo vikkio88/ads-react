@@ -65,7 +65,13 @@ class LoginView extends Component {
     }
 
     newGame() {
-        this.props.newGame({...this.state});
+        const {player, context} = this.state;
+        this.props.newGame({
+            status: {
+                player
+            },
+            context
+        });
     }
 
 

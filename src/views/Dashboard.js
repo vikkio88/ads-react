@@ -10,12 +10,13 @@ const apps = [
         name: "mail",
         icon: "mail outline",
         label: "Mail",
-        notifications: 1
+        notifications: 'messages'
     },
     {
         name: "news",
         icon: "newspaper",
-        label: "News"
+        label: "News",
+        notifications: 'news'
     },
     {
         name: "calendar",
@@ -32,13 +33,21 @@ const apps = [
 
 class DashboardView extends Component {
 
-    renderApps() {
+    renderApps(apps) {
         return apps.map(a => <AppIcon key={a.label} {...a}/>);
     }
 
     render() {
         const {nextDay, game} = this.props;
-        const {player, date} = game;
+        const {player, date, messages, news} = game.status;
+        const notifications = {messages, news};
+        const applications = apps.map(a => {
+            return {
+                ...a,
+                notifications: notifications[a.notification]
+                    ? notifications[a.notification].length : 0
+            }
+        });
         return (
             <div>
                 <div className="appView">
@@ -51,7 +60,7 @@ class DashboardView extends Component {
                         </Menu.Menu>
                     </Menu>
                     <Grid columns={3} doubling>
-                        {this.renderApps()}
+                        {this.renderApps(applications)}
                     </Grid>
                 </div>
                 <Menu secondary>
