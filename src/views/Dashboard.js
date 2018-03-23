@@ -4,32 +4,7 @@ import {AppIcon} from "../components";
 import {connect} from "react-redux";
 import {nextDay} from "../store/actions";
 import {DATE_FORMAT} from "../const";
-
-const apps = [
-    {
-        name: "mail",
-        icon: "mail outline",
-        label: "Mail",
-        notifications: 'messages'
-    },
-    {
-        name: "news",
-        icon: "newspaper",
-        label: "News",
-        notifications: 'news'
-    },
-    {
-        name: "calendar",
-        icon: "calendar outline",
-        label: "Calendar"
-    },
-    {
-        name: "database",
-        icon: "database",
-        label: "Database"
-    },
-];
-
+import {getApps} from "../libs/helpers";
 
 class DashboardView extends Component {
 
@@ -40,14 +15,7 @@ class DashboardView extends Component {
     render() {
         const {nextDay, game} = this.props;
         const {player, date, messages, news} = game.status;
-        const notifications = {messages, news};
-        const applications = apps.map(a => {
-            return {
-                ...a,
-                notifications: notifications[a.notification]
-                    ? notifications[a.notification].length : 0
-            }
-        });
+        const applications = getApps({messages, news});
         return (
             <div>
                 <div className="appView">
@@ -68,7 +36,7 @@ class DashboardView extends Component {
                         <Button
                             fluid
                             size="massive"
-                            onClick={() => nextDay(date)}
+                            onClick={() => nextDay(game)}
                         >
                             Next Day <Icon name="step forward"/>
                         </Button>
@@ -86,8 +54,8 @@ const stateToProps = ({game}) => {
 };
 const dispatchToProps = dispatch => {
     return {
-        nextDay(date) {
-            dispatch(nextDay(date));
+        nextDay(game) {
+            dispatch(nextDay(game));
         }
     };
 };

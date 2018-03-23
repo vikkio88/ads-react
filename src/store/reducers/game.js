@@ -1,4 +1,4 @@
-import {NEW_GAME, SET_DATE} from '../actions';
+import {NEW_GAME, NEXT_DAY} from '../actions';
 import {LOAD_GAME} from "../actions/game";
 
 const initialState = {
@@ -13,17 +13,13 @@ export const game = (state = initialState, action) => {
                 ...action.data
             }
         }
-        case SET_DATE: {
+        case NEXT_DAY: {
             return {
                 ...state,
-                status: {
-                    ...state.status,
-                    ...action.data
-                }
+                ...action.data
             }
         }
         case NEW_GAME: {
-            console.log(action.data);
             return {
                 ...state,
                 ...action.data

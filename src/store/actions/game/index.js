@@ -1,10 +1,11 @@
 import moment from "moment";
 import {baseGameStatus} from "../../../libs/models";
 import {BASE_DATES, DATE_FORMAT, YEAR} from "../../../const";
+import {day} from "../../../libs/simulators";
 
 export const NEW_GAME = 'new_game';
 export const LOAD_GAME = 'load_game';
-export const SET_DATE = 'set_date';
+export const NEXT_DAY = 'next_day';
 
 export const loadGame = () => {
     const game = localStorage.getItem('game') || null;
@@ -32,12 +33,11 @@ export const newGame = data => {
     }
 };
 
-export const nextDay = date => {
-    date = date.add(1, 'days');
+export const nextDay = game => {
     return {
-        type: SET_DATE,
+        type: NEXT_DAY,
         data: {
-            date
+            ...day.simulate(game)
         }
     };
 };
