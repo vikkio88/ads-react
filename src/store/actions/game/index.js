@@ -1,4 +1,5 @@
 import moment from "moment";
+import * as gameHelper from '../../../libs/helpers/gameHelper';
 import {baseGameStatus} from "../../../libs/models";
 import {BASE_DATES, DATE_FORMAT, YEAR} from "../../../const";
 import {day} from "../../../libs/simulators";
@@ -8,14 +9,18 @@ export const LOAD_GAME = 'load_game';
 export const NEXT_DAY = 'next_day';
 
 export const loadGame = () => {
-    const game = localStorage.getItem('game') || null;
-    return {
-        type: LOAD_GAME,
-        data: {
-            ...game
+        const game = gameHelper.loadGame();
+        if (game) {
+            game.status.date = moment(game.status.date);
+        }
+        return {
+            type: LOAD_GAME,
+            data: {
+                ...game
+            }
         }
     }
-};
+;
 
 export const newGame = data => {
     const {status, context} = data;
@@ -27,6 +32,7 @@ export const newGame = data => {
         },
         context
     };
+    gameHelper.saveGame(data);
     return {
         type: NEW_GAME,
         data

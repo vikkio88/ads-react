@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {nextDay} from "../store/actions";
 import {DATE_FORMAT} from "../const";
 import {getApps} from "../libs/helpers";
+import {deleteGame, saveGame} from "../libs/helpers/gameHelper";
 
 class DashboardView extends Component {
 
@@ -32,6 +33,14 @@ class DashboardView extends Component {
                     </Grid>
                 </div>
                 <Menu secondary>
+                    <Menu.Menu position="left">
+                        <Button onClick={() => saveGame(game)}>
+                            <Icon name="save"/> Save
+                        </Button>
+                        <Button onClick={() => deleteGame()}>
+                            <Icon name="remove"/> Remove
+                        </Button>
+                    </Menu.Menu>
                     <Menu.Menu position="right">
                         <Button
                             fluid
