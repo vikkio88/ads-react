@@ -2,6 +2,7 @@ import {triggerDates} from "./events";
 import {DAY_MONTH} from "../../const";
 import {resultAppender} from "./helpers";
 import moment from "moment";
+import {leagueHelper} from "../helpers/leagueHelper";
 
 export const day = {
     simulate(game) {
@@ -16,6 +17,11 @@ export const day = {
             context = result.context;
             resultAppender(status, result);
         });
+
+        const leagueDayResult = leagueHelper.simulateDay(context.league, context.teams, today, status.team);
+        console.log(leagueDayResult);
+        resultAppender(status, leagueDayResult);
+
 
         status.date = tomorrow;
         return {

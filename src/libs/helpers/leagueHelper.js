@@ -132,13 +132,22 @@ const leagueHelper = {
             teamHash[r.name].stats.positionTrend.push(index + 1);
         });
     },
-    simulateDay({table, fixture, scorers}, teams, date, currentTeam) {
+    simulateDay({table, fixture, scorers}, teams, date, playersTeam = null) {
         const todayRound = fixture.filter(r => moment(r.date).isSame(date)).pop();
         let messages = [];
         let news = [];
         let playerTeamMatch = null;
         if (todayRound) {
             const results = round.simulate(todayRound.matches, teams.list);
+
+            playersTeam && results.forEach(r => {
+                const {home, away} = r;
+                console.log([home, away]);
+                if ([home, away].indexOf(playersTeam)) {
+                    playerTeamMatch = r;
+                }
+            });
+
             leagueHelper.parseRoundResults(results, table);
             leagueHelper.parseScorers(results, scorers);
             todayRound.played = true;
@@ -149,9 +158,9 @@ const leagueHelper = {
             news.push(
                 newsGenerator.generate(
                     `Round ${todayRound.index + 1} played`,
-                    `Results`,
-                    results,
-                    date.format(DATE_FORMAT)
+                    `Results\n%results%`,
+                    date.format(DATE_FORMAT),
+                    {results}
                 )
             );
         }
