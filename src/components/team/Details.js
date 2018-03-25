@@ -11,7 +11,6 @@ class DetailsView extends Component {
         const {team} = this.props;
         let {coach} = team;
         coach = coach || {};
-        console.log(team);
         return (
             <Container fluid>
                 <Segment.Group>

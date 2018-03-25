@@ -3,13 +3,19 @@ const apps = [
         name: "mail",
         icon: "mail outline",
         label: "Mail",
-        notifications: 'messages'
+        notifications: {
+            name: 'messages',
+            active: m => !m.read
+        }
     },
     {
         name: "news",
         icon: "newspaper",
         label: "News",
-        notifications: 'news'
+        notifications: {
+            name: 'news',
+            active: n => !n.read
+        }
     },
     {
         name: "calendar",
@@ -24,12 +30,13 @@ const apps = [
 ];
 
 export const getApps = notifications => {
-    console.log(notifications);
     return apps.map(a => {
+        if (!a.notifications) return a;
+        const {name, active} = a.notifications;
         return {
             ...a,
-            notifications: notifications[a.notifications]
-                ? notifications[a.notifications].length : 0
+            notifications: notifications[name]
+                ? notifications[name].filter(active).length : 0
         }
     });
 };

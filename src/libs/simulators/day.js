@@ -19,7 +19,6 @@ export const day = {
         });
 
         const leagueDayResult = leagueHelper.simulateDay(context.league, context.teams, today, status.team);
-        console.log(leagueDayResult);
         resultAppender(status, leagueDayResult);
 
 

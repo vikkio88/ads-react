@@ -142,7 +142,6 @@ const leagueHelper = {
 
             playersTeam && results.forEach(r => {
                 const {home, away} = r;
-                console.log([home, away]);
                 if ([home, away].indexOf(playersTeam)) {
                     playerTeamMatch = r;
                 }
