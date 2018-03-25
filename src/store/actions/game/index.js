@@ -3,10 +3,12 @@ import * as gameHelper from '../../../libs/helpers/gameHelper';
 import {baseGameStatus} from "../../../libs/models";
 import {BASE_DATES, DATE_FORMAT, YEAR} from "../../../const";
 import {day} from "../../../libs/simulators";
+import {newsHelper} from "../../../libs/helpers";
 
 export const NEW_GAME = 'new_game';
 export const LOAD_GAME = 'load_game';
 export const NEXT_DAY = 'next_day';
+export const MODIFY_STATUS = 'modify_status';
 
 export const loadGame = () => {
         const game = gameHelper.loadGame();
@@ -45,5 +47,26 @@ export const nextDay = game => {
         data: {
             ...day.simulate(game)
         }
+    };
+};
+
+export const modifyStatus = status => {
+    return {
+        type: MODIFY_STATUS,
+        data: {
+            ...status
+        }
+    }
+};
+
+
+// NEWS
+export const setNewsAsRead = readNews => {
+    return (dispatch, getState) => {
+        const {status} = getState().game;
+        let {news} = status;
+        news = newsHelper.setAsRead(readNews, news);
+        status.news = news;
+        dispatch(modifyStatus(status));
     };
 };

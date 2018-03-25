@@ -15,3 +15,14 @@ export const newsGenerator = {
         }
     }
 };
+
+export const newsHelper = {
+    setAsRead(news, list) {
+        return list.map(n => {
+            if (n.id === news.id) {
+                n.read = true;
+            }
+            return n;
+        });
+    }
+};

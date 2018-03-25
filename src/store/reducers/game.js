@@ -1,5 +1,5 @@
 import {NEW_GAME, NEXT_DAY} from '../actions';
-import {LOAD_GAME} from "../actions/game";
+import {LOAD_GAME, MODIFY_STATUS} from "../actions/game";
 
 const initialState = {
     status: {},
@@ -23,6 +23,15 @@ export const game = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data
+            }
+        }
+        case MODIFY_STATUS: {
+            return {
+                ...state,
+                status: {
+                    ...state.status,
+                    ...action.data
+                }
             }
         }
         default:

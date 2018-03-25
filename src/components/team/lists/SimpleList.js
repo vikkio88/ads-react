@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Icon, Rating, Table} from "semantic-ui-react";
+import {Button, Rating, Table} from "semantic-ui-react";
 import {Badge} from "../";
 import {teamHelper} from "../../../libs/helpers";
 import {CURRENCY_MODIFIERS} from "../../../const";
@@ -53,9 +53,7 @@ class SimpleListView extends Component {
                             </Table.Cell>
                             {detailed && (
                                 <Table.Cell>
-                                    <Button onClick={() => this.props.teamDetails(t)}>
-                                        <Icon name="magnify"/>
-                                    </Button>
+                                    <Button onClick={() => this.props.teamDetails(t)} icon="magnify"/>
                                 </Table.Cell>
                             )}
                         </Table.Row>
