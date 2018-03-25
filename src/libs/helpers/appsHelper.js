@@ -24,6 +24,7 @@ const apps = [
 ];
 
 export const getApps = notifications => {
+    console.log(notifications);
     return apps.map(a => {
         return {
             ...a,

@@ -16,4 +16,5 @@ export const baseGameStatus = {
     messages: [],
     news: [],
     date: null,
+    marketOpen: true
 };
