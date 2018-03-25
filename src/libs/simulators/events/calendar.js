@@ -6,8 +6,8 @@ import leagueDefinitions from "../../../config/providers/leagueDefinitions";
 
 const buildFixture = ({status, context}) => {
     const nationality = status.player.nationality;
-    const thisYear = status.date.format('YYYY');
-    const nextYear = status.date.add(1, 'year').format('YYYY');
+    const thisYear = moment(status.date).format('YYYY');
+    const nextYear = moment(status.date).add(1, 'year').format('YYYY');
     const {teams} = context;
     const fixture = fixtureGenerator.generate(
         teams.list,
