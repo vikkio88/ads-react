@@ -5,6 +5,8 @@ import {Button, Grid, Icon} from "semantic-ui-react";
 import {Login} from "./Login";
 import {navigatePop} from "../store/actions";
 
+import {News as ReadNews} from "../components/news";
+
 import {Details as TeamDetails} from "../components/team";
 import {Details as PlayerDetails} from "../components/player";
 import {Details as CoachDetails} from "../components/coach";
@@ -15,6 +17,10 @@ const componentMap = {
     'calendar': <Calendar/>,
     'database': <Database/>,
 
+    // AppsSubView
+    'readNews': <ReadNews/>,
+
+    // Teams Views
     'teamDetails': <TeamDetails/>,
     'playerDetails': <PlayerDetails/>,
     'coachDetails': <CoachDetails/>,

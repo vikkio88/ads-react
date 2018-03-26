@@ -49,7 +49,7 @@ const dispatchToProps = dispatch => {
     return {
         readNews(news) {
             dispatch(setNewsAsRead(news));
-            //dispatch(navigatePush('readNews', news));
+            dispatch(navigatePush('readNews', news));
         }
     };
 };
