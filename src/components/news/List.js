@@ -1,42 +1,39 @@
 import React, {Component} from 'react';
-import {Button, Table} from "semantic-ui-react";
+import {Card, Feed, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {navigatePush} from "../../store/actions/navigation";
 import {setNewsAsRead} from "../../store/actions/game";
+import {randomizer} from "../../libs/generators";
 
 class ListView extends Component {
     render() {
         const {news, readNews} = this.props;
         return (
-            <Table celled padded>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Date</Table.HeaderCell>
-                        <Table.HeaderCell>Title</Table.HeaderCell>
-                        <Table.HeaderCell>NewsPaper</Table.HeaderCell>
-                        <Table.HeaderCell>Actions</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    {news.map(n => (
-                        <Table.Row key={n.id} positive={!n.read}>
-                            <Table.Cell collapsing>
-                                {n.date}
-                            </Table.Cell>
-                            <Table.Cell>{n.title}</Table.Cell>
-                            <Table.Cell>
-                                {n.newspaper}
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Button
-                                    icon="newspaper"
-                                    onClick={() => readNews(n)}
-                                />
-                            </Table.Cell>
-                        </Table.Row>
-                    ))}
-                </Table.Body>
-            </Table>
+            <Feed>
+                {news.map(n => (
+                    <Card color={!n.read ? 'red' : null} fluid key={n.id}>
+                        <Feed.Event>
+                            <Feed.Label>
+                                <h2><a onClick={() => readNews(n)}>{n.newspaper}</a></h2>
+                                <Icon name="newspaper" size="huge"/>
+                            </Feed.Label>
+                            <Feed.Content>
+                                <Feed.Date>{n.date}</Feed.Date>
+                                <Feed.Summary>
+                                    <h2>{n.title}</h2>
+                                </Feed.Summary>
+                                <Feed.Meta>
+                                    <Feed.Like>
+                                        <Icon name='like'/>
+                                        {randomizer.int(10, 40)} Likes
+                                    </Feed.Like>
+                                </Feed.Meta>
+
+                            </Feed.Content>
+                        </Feed.Event>
+                    </Card>
+                ))}
+            </Feed>
         );
     }
 }
