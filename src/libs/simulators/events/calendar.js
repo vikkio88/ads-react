@@ -35,7 +35,7 @@ const buildFixture = ({status, context}) => {
 
 };
 
-const marketClose = (status, context) => {
+const marketClose = ({status, context}) => {
     status = {
         ...status,
         marketOpen: false
