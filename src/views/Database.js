@@ -7,7 +7,7 @@ import {Panel} from "../components/league";
 
 class DatabaseView extends Component {
 
-    getTabs({teams, table, scorers}) {
+    getTabs({teams, table, scorers, league}) {
         return [
             {
                 menuItem: "Teams", render: () => (
@@ -19,7 +19,7 @@ class DatabaseView extends Component {
             {
                 menuItem: "League Tables", render: () => (
                     <Tab.Pane>
-                        <Panel table={table} scorers={scorers}/>
+                        <Panel league={league} table={table} scorers={scorers}/>
                     </Tab.Pane>
                 )
             },
@@ -32,8 +32,12 @@ class DatabaseView extends Component {
         const teams = (context.teams || {}).list || [];
         const table = (context.league || {}).table || [];
         const scorers = (context.league || {}).scorers || [];
-        console.log({table, scorers});
-        const tabs = this.getTabs({teams, table, scorers});
+        const {name, season} = context.league;
+        const league = {
+            name: name || '',
+            season: season || ''
+        };
+        const tabs = this.getTabs({teams, table, scorers, league});
         return <Tab menu={{pointing: true}} panes={tabs}/>;
     }
 }

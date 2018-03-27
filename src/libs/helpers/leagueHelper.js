@@ -168,6 +168,7 @@ const leagueHelper = {
     },
     orderedTable(table) {
         const orderedTable = [];
+        if (!table) return orderedTable;
         Object.keys(table).forEach(t => {
             orderedTable.push(table[t]);
         });
@@ -175,6 +176,7 @@ const leagueHelper = {
     },
     orderedScorers(scorers) {
         const orderedTable = [];
+        if (!scorers) return orderedTable;
         Object.keys(scorers).forEach(p => {
             orderedTable.push(scorers[p]);
         });

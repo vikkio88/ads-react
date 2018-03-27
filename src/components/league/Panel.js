@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import {Table} from "./Table";
 import {Scorers} from "./Scorers";
+import {Divider} from "semantic-ui-react";
 
 
 class Panel extends Component {
     render() {
-        const {table, scorers} = this.props;
+        const {league, table, scorers} = this.props;
         return (
             <div>
-                <Table teams={table}/>
+                <Table league={league} teams={table}/>
+                <Divider/>
                 <Scorers scorers={scorers}/>
             </div>
         );
