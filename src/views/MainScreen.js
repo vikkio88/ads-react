@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Dashboard, Mail, News, Calendar, Database} from './';
-import {Button, Grid, Icon} from "semantic-ui-react";
+import {Button, Grid, Icon, Menu} from "semantic-ui-react";
 import {Login} from "./Login";
 import {navigatePop} from "../store/actions";
 
@@ -33,18 +33,20 @@ class MainScreenView extends Component {
         const {loggedIn} = this.props;
         if (viewComponent) {
             return (
-                <Grid centered stretched columns={1} doubling>
-                    <Grid.Row>
+                <div>
+                    <Menu className="top fixed">
                         <Button fluid onClick={() => this.props.back()} size="massive">
                             <Icon name="step backward"/> Back
                         </Button>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <div className="appView">
-                            {viewComponent}
-                        </div>
-                    </Grid.Row>
-                </Grid>
+                    </Menu>
+                    <Grid centered stretched columns={1} doubling style={{marginTop: '30px'}}>
+                        <Grid.Row>
+                            <div className="appView">
+                                {viewComponent}
+                            </div>
+                        </Grid.Row>
+                    </Grid>
+                </div>
             );
         }
 

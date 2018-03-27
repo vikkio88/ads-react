@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Container, Dropdown, Form, Icon, Menu} from "semantic-ui-react";
+import {Button, Container, Divider, Dropdown, Form, Icon, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {ucFirst} from 'uvk';
 
@@ -80,8 +80,10 @@ class LoginView extends Component {
         const teams = ((this.state.context || {}).teams || {}).list || [];
         return (
             <div>
-                <Container textAlign="center">
+                <Menu className="top fixed">
                     <h1>Athletic Director Simulator</h1>
+                </Menu>
+                <Container textAlign="center" style={{marginTop: '60px'}}>
                     <h3>Insert your details</h3>
                     <Form>
                         <Form.Field>
@@ -100,8 +102,9 @@ class LoginView extends Component {
                                 onChange={e => this.updatePlayerField('surname', ucFirst(e.target.value))}
                             />
                         </Form.Field>
+                        <Divider/>
                         <Form.Field>
-                            <label>Nationality</label>
+                            <label>Country</label>
                             <Dropdown
                                 selection
                                 placeholder='Select your country'
@@ -116,7 +119,7 @@ class LoginView extends Component {
                         <SimpleList teams={teams}/>
                     </Form>
                 </Container>
-                <Menu borderless fluid>
+                <Menu className="bottom fixed">
                     <Menu.Menu position="right">
                         <Button
                             size="massive"

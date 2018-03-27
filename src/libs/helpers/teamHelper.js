@@ -40,13 +40,13 @@ const teamHelper = {
         const orderedRoster = team.roster.sort(byPlayerAbilityToScore);
         const possibleScorers = orderedRoster.filter(p => p.position !== 'GK');
         const scorers = [];
-        range(goals).forEach(_ => {
+        range(goals).forEach(() => {
             if (randomizer.chance(70)) {
-                const {name, surname} = possibleScorers[randomizer.int(0, 3)];
-                scorers.push({name, surname});
+                const {id, name, surname} = possibleScorers[randomizer.int(0, 3)];
+                scorers.push({id, name, surname});
             } else {
-                const {name, surname} = randomizer.pickOne(possibleScorers);
-                scorers.push({name, surname});
+                const {id, name, surname} = randomizer.pickOne(possibleScorers);
+                scorers.push({id, name, surname});
             }
         });
 

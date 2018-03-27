@@ -28,7 +28,6 @@ class ListView extends Component {
                                         {randomizer.int(10, 40)} Likes
                                     </Feed.Like>
                                 </Feed.Meta>
-
                             </Feed.Content>
                         </Feed.Event>
                     </Card>
