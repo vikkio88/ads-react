@@ -15,7 +15,7 @@ class Scorers extends Component {
         return (
             <div>
                 <h1>Scorers</h1>
-                <Table celled>
+                <Table celled unstackable>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>#</Table.HeaderCell>

@@ -1,6 +1,0 @@
-.appView {
-    min-height: 90vh;
-    display: flex;
-    flex-flow: column nowrap;
-    flex: .9
-}

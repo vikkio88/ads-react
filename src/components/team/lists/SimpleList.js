@@ -14,7 +14,7 @@ class SimpleListView extends Component {
             return <div/>;
         }
         return (
-            <Table celled padded>
+            <Table celled padded unstackable>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>#</Table.HeaderCell>

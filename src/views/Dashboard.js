@@ -21,17 +21,17 @@ class DashboardView extends Component {
             <div>
                 <Menu className="top fixed">
                     <Menu.Menu position="left">
-                        <h1 style={{marginLeft: '25px'}}>
+                        <h3 style={{marginLeft: '25px'}}>
                             {player && `${player.name} ${player.surname}`}
-                        </h1>
+                        </h3>
                     </Menu.Menu>
                     <Menu.Menu>
                         <strong>{team ? `${team}` : ''}</strong>
                     </Menu.Menu>
                     <Menu.Menu position="right">
-                        <h2 style={{marginRight: '25px'}}>
+                        <h3 style={{marginRight: '25px'}}>
                             {date && date.format(DATE_FORMAT)}
-                        </h2>
+                        </h3>
                     </Menu.Menu>
                 </Menu>
                 <Container style={{marginTop: '60px'}}>

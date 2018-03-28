@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Dashboard, Mail, News, Calendar, Database} from './';
-import {Button, Grid, Icon, Menu} from "semantic-ui-react";
+import {Button, Container, Icon, Menu} from "semantic-ui-react";
 import {Login} from "./Login";
 import {navigatePop} from "../store/actions";
 
@@ -39,13 +39,9 @@ class MainScreenView extends Component {
                             <Icon name="step backward"/> Back
                         </Button>
                     </Menu>
-                    <Grid centered stretched columns={1} doubling style={{marginTop: '30px'}}>
-                        <Grid.Row>
-                            <div className="appView">
-                                {viewComponent}
-                            </div>
-                        </Grid.Row>
-                    </Grid>
+                    <Container style={{marginTop: '80px'}} textAlign="center">
+                        {viewComponent}
+                    </Container>
                 </div>
             );
         }

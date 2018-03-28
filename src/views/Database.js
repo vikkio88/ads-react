@@ -11,14 +11,14 @@ class DatabaseView extends Component {
         return [
             {
                 menuItem: "Teams", render: () => (
-                    <Tab.Pane>
+                    <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
                         <SimpleList teams={teams} detailed/>
                     </Tab.Pane>
                 )
             },
             {
                 menuItem: "League Tables", render: () => (
-                    <Tab.Pane>
+                    <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
                         <Panel league={league} table={table} scorers={scorers}/>
                     </Tab.Pane>
                 )
