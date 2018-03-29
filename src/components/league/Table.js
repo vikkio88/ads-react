@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Responsive, Table as STable} from 'semantic-ui-react';
+import {Table as STable} from 'semantic-ui-react';
 import {leagueHelper} from "../../libs/helpers";
 
 

@@ -1,6 +1,16 @@
+import {teamHelper} from "../helpers";
+
 export const resultAppender = (status, {news, messages}) => {
     news && append('news', status, news);
     messages && append('messages', status, messages);
+};
+
+export const formatResult = (status, context) => {
+    const {hash} = context.teams;
+    context.teams = {
+        hash,
+        list: teamHelper.objectToTeamArray(hash)
+    }
 };
 
 const append = (key, container, result) => {
@@ -16,3 +26,5 @@ const append = (key, container, result) => {
         ];
     }
 };
+
+

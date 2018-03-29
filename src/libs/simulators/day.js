@@ -1,6 +1,6 @@
 import {triggerDates} from "./events";
 import {DAY_MONTH} from "../../const";
-import {resultAppender} from "./helpers";
+import {formatResult, resultAppender} from "./helpers";
 import moment from "moment";
 import {leagueHelper} from "../helpers/leagueHelper";
 
@@ -23,6 +23,7 @@ export const day = {
 
 
         status.date = tomorrow;
+        formatResult(status, context);
         return {
             status: {
                 ...status,
