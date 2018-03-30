@@ -3,10 +3,9 @@ import {generator} from '../generators';
 import {playerHelper} from './playerHelper';
 import {teamHelper} from './teamHelper';
 import {round} from '../simulators';
-import {newsGenerator} from './newshelper';
+import {newsGenerator, PAYLOAD_TYPES} from './newshelper';
 import {DATE_FORMAT} from '../../const';
 import {tableOrdering} from "../utils";
-import {markdownHelper} from "./markdownHelper";
 
 const LOSER_MODIFIERS = {
     decreases: [
@@ -160,7 +159,7 @@ const leagueHelper = {
                     `Round ${todayRound.index + 1} played`,
                     `Results\n`,
                     date.format(DATE_FORMAT),
-                    markdownHelper.results(results)
+                    {type: PAYLOAD_TYPES.RESULT, data: results}
                 )
             );
         }

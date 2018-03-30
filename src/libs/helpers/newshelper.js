@@ -1,7 +1,10 @@
 import {generator} from "../generators/generator";
 import {ulid} from "ulid";
-
 const NEWS_KEY = 'news';
+export const PAYLOAD_TYPES = {
+    RESULT: 'result'
+};
+
 export const newsGenerator = {
     generate(title, message, date, payload = null) {
         return {

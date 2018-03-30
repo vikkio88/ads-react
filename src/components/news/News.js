@@ -1,15 +1,31 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import ReactMarkdown from 'react-markdown';
-import {Card} from "semantic-ui-react";
+import {Accordion, Card} from "semantic-ui-react";
 import {randomizer} from "../../libs/generators";
+import {PAYLOAD_TYPES} from "../../libs/helpers/newshelper";
+import {ResultLine} from "../league/match";
+
 
 class NewsView extends Component {
+
+    renderPayload(payload) {
+        switch (payload.type) {
+            case PAYLOAD_TYPES.RESULT: {
+                return (
+                    <Accordion styled fluid>
+                        {payload.data.map((r, index) => <ResultLine key={index} match={r} played/>)}
+                    </Accordion>
+                );
+            }
+            default:
+                return <span/>;
+        }
+    }
+
     render() {
         const {news} = this.props;
-        console.log(news);
         return (
-            <Card fluid>
+            <Card fluid centered>
                 <Card.Content>
                     <Card.Header
                         style={{fontWeight: 'bold', color: randomizer.pickOne(['orange', 'red', 'blue'])}}
@@ -22,7 +38,7 @@ class NewsView extends Component {
                     <Card.Meta>{news.date}</Card.Meta>
                     <Card.Description>
                         {news.message}
-                        {news.payload && <ReactMarkdown source={news.payload}/>}
+                        {news.payload && this.renderPayload(news.payload)}
                     </Card.Description>
                 </Card.Content>
             </Card>
