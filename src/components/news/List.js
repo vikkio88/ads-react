@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Card, Feed, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
+import numeral from "numeral";
 import {navigatePush} from "../../store/actions/navigation";
 import {setNewsAsRead} from "../../store/actions/game";
 import {randomizer} from "../../libs/generators";
+import {CURRENCY_MODIFIERS} from "../../const";
 
 class ListView extends Component {
     render() {
@@ -25,7 +27,7 @@ class ListView extends Component {
                                 <Feed.Meta>
                                     <Feed.Like>
                                         <Icon name='like'/>
-                                        {randomizer.int(10, 40)} Likes
+                                        {numeral(randomizer.int(1, 500) * CURRENCY_MODIFIERS.THOUSANDS).format('0a')} Likes
                                     </Feed.Like>
                                 </Feed.Meta>
                             </Feed.Content>

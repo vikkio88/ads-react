@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {SimpleList} from "../components/team";
 import {Tab} from "semantic-ui-react";
-import {Panel} from "../components/league";
+import {Fixture, Panel} from "../components/league";
 
 
 class DatabaseView extends Component {
 
-    getTabs({teams, table, scorers, league}) {
+    getTabs({teams, table, scorers, league, fixture}) {
         return [
             {
                 menuItem: "Teams", render: () => (
@@ -23,7 +23,13 @@ class DatabaseView extends Component {
                     </Tab.Pane>
                 )
             },
-            {menuItem: "League Calendar", render: () => <h1>League Calendar</h1>},
+            {
+                menuItem: "League Calendar", render: () => (
+                    <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
+                        <Fixture fixture={fixture}/>
+                    </Tab.Pane>
+                )
+            },
         ];
     }
 
@@ -32,12 +38,12 @@ class DatabaseView extends Component {
         const teams = (context.teams || {}).list || [];
         const table = (context.league || {}).table || [];
         const scorers = (context.league || {}).scorers || [];
-        const {name, season} = context.league;
+        const {name, season, fixture} = context.league;
         const league = {
             name: name || '',
             season: season || ''
         };
-        const tabs = this.getTabs({teams, table, scorers, league});
+        const tabs = this.getTabs({teams, table, scorers, league, fixture});
         return <Tab menu={{pointing: true}} panes={tabs}/>;
     }
 }
