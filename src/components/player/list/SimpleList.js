@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Icon, Rating, Table} from "semantic-ui-react";
+import {Button, Rating, Table} from "semantic-ui-react";
 import {extendedPositions} from "../../../const";
 import {valueToRating} from "../../../libs/utils";
 import {connect} from "react-redux";
@@ -44,9 +44,10 @@ class SimpleListView extends Component {
                                 />
                             </Table.Cell>
                             <Table.Cell>
-                                <Button onClick={() => this.props.playerDetails(p)}>
-                                    <Icon name="magnify"/>
-                                </Button>
+                                <Button
+                                    onClick={() => this.props.playerDetails(p)}
+                                    icon="magnify"
+                                />
                             </Table.Cell>
                         </Table.Row>
                     ))}
