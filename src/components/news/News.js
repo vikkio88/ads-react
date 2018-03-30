@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import ReactMarkdown from 'react-markdown';
 import {Card} from "semantic-ui-react";
 import {randomizer} from "../../libs/generators";
 
 class NewsView extends Component {
     render() {
         const {news} = this.props;
+        console.log(news);
         return (
             <Card fluid>
                 <Card.Content>
@@ -18,7 +20,10 @@ class NewsView extends Component {
                 </Card.Content>
                 <Card.Content>
                     <Card.Meta>{news.date}</Card.Meta>
-                    <Card.Description>{news.message}</Card.Description>
+                    <Card.Description>
+                        {news.message}
+                        {news.payload && <ReactMarkdown source={news.payload}/>}
+                    </Card.Description>
                 </Card.Content>
             </Card>
         );

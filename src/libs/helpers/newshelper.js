@@ -3,7 +3,7 @@ import {ulid} from "ulid";
 
 const NEWS_KEY = 'news';
 export const newsGenerator = {
-    generate(title, message, date, payload = {}) {
+    generate(title, message, date, payload = null) {
         return {
             id: `${NEWS_KEY}${ulid()}`,
             title,

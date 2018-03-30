@@ -6,6 +6,7 @@ import {round} from '../simulators';
 import {newsGenerator} from './newshelper';
 import {DATE_FORMAT} from '../../const';
 import {tableOrdering} from "../utils";
+import {markdownHelper} from "./markdownHelper";
 
 const LOSER_MODIFIERS = {
     decreases: [
@@ -157,9 +158,9 @@ const leagueHelper = {
             news.push(
                 newsGenerator.generate(
                     `Round ${todayRound.index + 1} played`,
-                    `Results\n%results%`,
+                    `Results\n`,
                     date.format(DATE_FORMAT),
-                    {results}
+                    markdownHelper.results(results)
                 )
             );
         }

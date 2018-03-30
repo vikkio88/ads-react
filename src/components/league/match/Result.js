@@ -12,13 +12,28 @@ class Result extends Component {
         this.setState({activeIndex: newIndex})
     };
 
+    formatScorers(scorers) {
+        const formattedScorers = {};
+        scorers.forEach(s => {
+            const playerKey = `${s.name} ${s.surname}`;
+            formattedScorers[playerKey] = formattedScorers[playerKey]
+                ? formattedScorers[playerKey] + 1 : 1
+        });
+        return Object.keys(formattedScorers).map(name => {
+            return {
+                name,
+                goals: formattedScorers[name]
+            }
+        })
+    }
+
     render() {
         const {activeIndex} = this.state;
         const {results = null, matches, date, index, played} = this.props.result;
         const matchRows = results || matches;
         return (
             <Card fluid>
-                <h1>Round {index + 1} - {`${moment(date).format(DATE_FORMAT)}`}</h1>
+                <h3>Round {index + 1} - {`${moment(date).format(DATE_FORMAT)}`}</h3>
                 <Accordion styled fluid>
                     {matchRows.map((m, index) => (
                         <div key={index}>
@@ -30,16 +45,16 @@ class Result extends Component {
                                 <Accordion.Content active={activeIndex === index}>
                                     <List bulleted>
                                         {
-                                            m.scorers.home.map((s, index) => (
+                                            this.formatScorers(m.scorers.home).map((s, index) => (
                                                 <List.Item key={index}>
-                                                    {`${s.name} ${s.surname} - ${m.home}`}
+                                                    {`${s.name}${s.goals > 1 ? ` (x${s.goals})` : ''} - ${m.home}`}
                                                 </List.Item>
                                             ))
                                         }
                                         {
-                                            m.scorers.away.map((s, index) => (
+                                            this.formatScorers(m.scorers.away).map((s, index) => (
                                                 <List.Item key={index}>
-                                                    {`${s.name} ${s.surname} - ${m.away}`}
+                                                    {`${s.name}${s.goals > 1 ? ` (x${s.goals})` : ''} - ${m.away}`}
                                                 </List.Item>
                                             ))
                                         }
