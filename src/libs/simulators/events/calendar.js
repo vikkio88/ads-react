@@ -1,13 +1,13 @@
 import moment from 'moment';
 import {fixtureGenerator} from '../../generators'
 import {newsGenerator} from '../../helpers';
-import {DATE_FORMAT} from '../../../const'
+import {DATE_FORMAT, YEAR} from '../../../const'
 import leagueDefinitions from "../../../config/providers/leagueDefinitions";
 
 const buildFixture = ({status, context}) => {
     const nationality = status.player.nationality;
-    const thisYear = moment(status.date).format('YYYY');
-    const nextYear = moment(status.date).add(1, 'year').format('YYYY');
+    const thisYear = moment(status.date).format(YEAR);
+    const nextYear = moment(status.date).add(1, 'year').format(YEAR);
     const {teams} = context;
     const fixture = fixtureGenerator.generate(
         teams.list,
