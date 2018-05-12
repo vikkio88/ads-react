@@ -37,7 +37,8 @@ const generator = {
     },
     status() {
         return {
-            morale: randomizer.int(10, 100)
+            morale: randomizer.int(10, 100),
+            injured: false
         }
     },
     statusModifiers() {

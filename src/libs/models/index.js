@@ -6,7 +6,8 @@ export const baseJob = {
 export const baseLeague = {
     table: [],
     fixture: [],
-    scorers: {}
+    scorers: {},
+    lineups: {}
 };
 
 export const baseGameStatus = {
