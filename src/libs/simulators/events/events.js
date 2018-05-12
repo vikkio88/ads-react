@@ -32,6 +32,7 @@ export const seasonOver = ({status, context}) => {
     context.league.table = teamHelper.createCleanTable(context.teams.list);
     context.league.fixture = [];
     context.league.scorers = {};
+    context.league.lineups = {};
 
     const winner = orderedTable[0];
     const second = orderedTable[1];
