@@ -60,7 +60,7 @@ const match = {
         if (homeGoal === awayGoal) {
             isDraw = true;
         }
-        const scorers = this.scorers(homeTeam, awayTeam, homeGoal, awayGoal);
+        const {scorers, lineups} = this.teamStats(homeTeam, awayTeam, homeGoal, awayGoal);
         return {
             home: homeTeam.name,
             away: awayTeam.name,
@@ -69,7 +69,8 @@ const match = {
             isDraw,
             homeGoal,
             awayGoal,
-            scorers
+            scorers,
+            lineups
         }
     },
     points(team) {
@@ -77,12 +78,17 @@ const match = {
         points += this.malusModule(teamHelper.canPlayModule(team));
         return points;
     },
-    scorers(homeTeam, awayTeam, homeGoal, awayGoal) {
-        const home = teamHelper.scorers(homeTeam, homeGoal);
-        const away = teamHelper.scorers(awayTeam, awayGoal);
+    teamStats(homeTeam, awayTeam, homeGoal, awayGoal) {
+        const homeLineUp = teamHelper.lineups(homeTeam);
+        const awayLineup = teamHelper.lineups(awayTeam);
+        const home = teamHelper.scorers(homeTeam, homeLineUp, homeGoal);
+        const away = teamHelper.scorers(awayTeam, awayLineup, awayGoal);
         return {
-            home,
-            away
+            lineups: [...homeLineUp, ...awayLineup],
+            scorers: {
+                home,
+                away
+            }
         }
     },
     bonusAge(team) {

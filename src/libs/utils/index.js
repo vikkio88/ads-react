@@ -52,3 +52,5 @@ export const byPlayerAbilityToScore = (player, other) => {
 export const byPlayerPosition = (player, other) => {
     return extendedPositions[player.position].weight <= extendedPositions[other.position].weight ? -1 : 1;
 };
+export const byPlayerSkill = (player, other) => player.skill <= other.skill ? 1 : -1;
+export const onlyPlayerPosition = position => player => player.position === position;

@@ -103,6 +103,19 @@ const leagueHelper = {
         });
         return oldScorers;
     },
+    addLineupsRecord(results, oldLineups) {
+        results.forEach(r => {
+            const {lineups} = r;
+            lineups.forEach(l => {
+                if (oldLineups[l]) {
+                    oldLineups[l]++;
+                } else {
+                    oldLineups[l] = 1;
+                }
+            });
+        });
+        return oldLineups;
+    },
     updateStatus(result, teams) {
         result.forEach(r => {
             let winnerModifiers = WINNER_MODIFIERS;
@@ -132,7 +145,7 @@ const leagueHelper = {
             teamHash[r.name].stats.positionTrend.push(index + 1);
         });
     },
-    simulateDay({table, fixture, scorers}, teams, date, playersTeam = null) {
+    simulateDay({table, fixture, scorers, lineups}, teams, date, playersTeam = null) {
         const todayRound = fixture.filter(r => moment(r.date).isSame(date)).pop();
         let messages = [];
         let news = [];
@@ -149,6 +162,7 @@ const leagueHelper = {
 
             leagueHelper.parseRoundResults(results, table);
             leagueHelper.parseScorers(results, scorers);
+            leagueHelper.addLineupsRecord(results, lineups);
             todayRound.played = true;
             todayRound.results = results;
             leagueHelper.updateStatus(results, teams.hash);

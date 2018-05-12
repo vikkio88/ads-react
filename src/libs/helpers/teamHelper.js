@@ -1,7 +1,7 @@
 import {randomizer, range} from 'uvk';
 import {extendedModules} from '../../const';
 import {positions} from '../../const';
-import {byPlayerAbilityToScore} from "../utils";
+import {byPlayerAbilityToScore, byPlayerSkill, onlyPlayerPosition} from "../utils";
 
 const teamHelper = {
     createCleanTable(teams) {
@@ -36,9 +36,9 @@ const teamHelper = {
         });
         return teams;
     },
-    scorers(team, goals) {
-        const orderedRoster = team.roster.sort(byPlayerAbilityToScore);
-        const possibleScorers = orderedRoster.filter(p => p.position !== 'GK');
+    scorers(team, lineup, goals) {
+        const orderedRoster = team.roster.filter(p => lineup.indexOf(p.id) > -1).sort(byPlayerAbilityToScore);
+        const possibleScorers = orderedRoster.filter(p => p.position !== 'GK' && !p.status.injured);
         const scorers = [];
         range(goals).forEach(() => {
             if (randomizer.chance(70)) {
@@ -51,6 +51,36 @@ const teamHelper = {
         });
 
         return scorers;
+    },
+    lineups(team) {
+        const {coach, roster} = team;
+        let module = extendedModules["4-4-2"];
+        if (coach && coach.module) {
+            module = extendedModules[coach.module];
+        }
+        let lineUps = [];
+        module.roles.forEach((value, positionIndex) => {
+            const position = positions[positionIndex];
+            const newLineups = this.getPlayersByPosition(roster, position, value, lineUps);
+            lineUps = lineUps.concat(newLineups);
+        });
+        return [...new Set(lineUps)];
+    },
+    getPlayersByPosition(roster, position, quantity = 1, excludeIds = []) {
+        const lineups = [];
+        roster = roster.filter(p => excludeIds.indexOf(p.id) === -1);
+        for (let i = 0; i < quantity; i++) {
+            roster = roster.filter(p => lineups.indexOf(p.id) === -1);
+            let lineup = roster.filter(onlyPlayerPosition(position)).sort(byPlayerSkill)[0];
+            if (!lineup) {
+                lineup = randomizer.pickOne(roster);
+            }
+            lineups.push(lineup.id);
+        }
+        return lineups;
+    },
+    getPlayerById(team, id) {
+        return team.roster.filter(p => p.id === id)[0];
     },
     averageSkill(team) {
         let avg = 0;

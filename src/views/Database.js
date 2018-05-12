@@ -35,6 +35,7 @@ class DatabaseView extends Component {
 
     render() {
         const {context} = this.props.game;
+        console.log(context.league.lineups);
         const teams = (context.teams || {}).list || [];
         const table = (context.league || {}).table || [];
         const scorers = (context.league || {}).scorers || [];
