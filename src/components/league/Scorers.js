@@ -27,7 +27,7 @@ class Scorers extends Component {
                     <Table.Body>
                         {
                             scorers.map((s, index) => (
-                                <Table.Row key={index}>
+                                <Table.Row key={index} className="hoverableRow">
                                     <Table.Cell><strong>{index + 1}</strong></Table.Cell>
                                     <Table.Cell>{`${s.player.name} ${s.player.surname}`}</Table.Cell>
                                     <Table.Cell>{s.team}</Table.Cell>

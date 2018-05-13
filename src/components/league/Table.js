@@ -29,7 +29,7 @@ class Table extends Component {
                     <STable.Body>
                         {
                             teams.map((t, index) => (
-                                <STable.Row key={index}>
+                                <STable.Row key={index} className="hoverableRow">
                                     <STable.Cell><strong>{index + 1}</strong></STable.Cell>
                                     <STable.Cell>{t.name}</STable.Cell>
                                     <STable.Cell collapsing>{t.points}</STable.Cell>
