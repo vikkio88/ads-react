@@ -14,7 +14,7 @@ class NewsView extends Component {
         switch (payload.type) {
             case PAYLOAD_TYPES.RESULT: {
                 return (
-                    <Accordion styled fluid>
+                    <Accordion styled fluid style={{fontSize: '16px'}}>
                         {payload.data.map((r, index) => <ResultLine key={index} match={r} played/>)}
                     </Accordion>
                 );
@@ -38,7 +38,7 @@ class NewsView extends Component {
                 </Card.Content>
                 <Card.Content>
                     <Card.Meta>{news.date}</Card.Meta>
-                    <Card.Description>
+                    <Card.Description style={{fontSize: '20px', padding: '30px', textAlign: 'justified'}}>
                         <Interweave
                             tagName="div"
                             content={(new MarkdownIt()).render(news.message)}
