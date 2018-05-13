@@ -46,7 +46,7 @@ class SimpleListView extends Component {
                     </Table.Header>
                     <Table.Body>
                         {filteredRoster.map(p => (
-                            <Table.Row key={p.id}>
+                            <Table.Row key={p.id} className='hoverableRow'>
                                 <Table.Cell/>
                                 <Table.Cell>{`${p.name} ${p.surname}`}</Table.Cell>
                                 <Table.Cell>
