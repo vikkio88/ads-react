@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Icon, List, Accordion} from "semantic-ui-react";
+import {COLOURS} from "../../styles";
 
 class ResultLine extends Component {
     state = {
@@ -25,7 +26,7 @@ class ResultLine extends Component {
         const {active} = this.state;
         const {played, match} = this.props;
         return (
-            <div style={active ? {backgroundColor: '#f9f9f9'} : null}>
+            <div style={active ? {backgroundColor: COLOURS.light_gray} : null}>
                 <Accordion.Title active={active} onClick={played ? () => this.setState({active: !active}) : null}>
                     {played && <Icon name='dropdown'/>}
                     {`${match.home} - ${match.away}`}
