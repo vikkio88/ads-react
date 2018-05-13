@@ -1,7 +1,7 @@
 import moment from 'moment';
 import {fixtureGenerator} from '../../generators'
 import {newsGenerator} from '../../helpers';
-import {DATE_FORMAT, YEAR} from '../../../const'
+import {BASE_DATES, DATE_FORMAT, YEAR} from '../../../const'
 import leagueDefinitions from "../../../config/providers/leagueDefinitions";
 
 const buildFixture = ({status, context}) => {
@@ -11,8 +11,7 @@ const buildFixture = ({status, context}) => {
     const {teams} = context;
     const fixture = fixtureGenerator.generate(
         teams.list,
-        moment(`02-08-${thisYear}`, DATE_FORMAT)
-        //moment(`26-08-${thisYear}`, DATE_FORMAT)
+        moment(`${BASE_DATES.FIRST_MATCH}${thisYear}`, DATE_FORMAT)
     );
 
     context = {
@@ -27,7 +26,7 @@ const buildFixture = ({status, context}) => {
 
     const news = newsGenerator.generate(
         'New Season Calendar!',
-        `Presented the new match calendar for ${context.league.name} ${context.league.season}`,
+        `Presented the new match calendar for **${context.league.name} ${context.league.season}**`,
         moment(status.date).format(DATE_FORMAT)
     );
 

@@ -10,5 +10,7 @@ export const CURRENCY_MODIFIERS = {MILLIONS: 1000000, THOUSANDS: 1000};
 
 export const BASE_DATES = {
     //GAME_START: '01-06-'
-    GAME_START: '28-07-'
+    GAME_START: '28-07-',
+    //FIRST_MATCH: '26-08-',
+    FIRST_MATCH: '02-08-'
 };
