@@ -24,6 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "buildDeploy": "GENERATE_SOURCEMAP=false react-scripts build && yarn deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "surge --domain athletic-director-simulator.surge.sh build/"
