@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Icon, List, Accordion} from "semantic-ui-react";
-import {COLOURS} from "../../styles";
+import {Icon, Segment, Accordion} from "semantic-ui-react";
 
 class ResultLine extends Component {
     state = {
@@ -26,25 +25,33 @@ class ResultLine extends Component {
         const {active} = this.state;
         const {played, match} = this.props;
         return (
-            <div style={active ? {backgroundColor: COLOURS.light_gray} : null}>
-                <Accordion.Title active={active} onClick={played ? () => this.setState({active: !active}) : null}>
+            <div>
+                <Accordion.Title as="h4" active={active}
+                                 onClick={played ? () => this.setState({active: !active}) : null}>
                     {played && <Icon name='dropdown'/>}
                     {`${match.home} - ${match.away}`}
                     <strong style={{marginLeft: '5px'}}>{`${match.homeGoal || 0} - ${match.awayGoal || 0}`}</strong>
                 </Accordion.Title>
                 {played && (
                     <Accordion.Content active={active}>
-                        <List>
+                        <Segment.Group horizontal>
                             {
                                 ['home', 'away'].map(k => {
-                                    return this.formatScorers(match.scorers[k]).map((s, index) => (
-                                        <List.Item key={index} as='li' value='-'>
-                                            {`${s.name}${s.goals > 1 ? ` (x${s.goals})` : ''}`} - <strong>{`${match[k]}`}</strong>
-                                        </List.Item>
-                                    ))
+                                    return (
+                                        <Segment key={k} style={{padding: 0, margin: 0}} basic>
+                                            {
+                                                this.formatScorers(match.scorers[k]).map((s, index) => (
+                                                    <Segment key={index} style={{padding: 0, margin: 0}} basic>
+                                                        {`${s.name}`}
+                                                        {s.goals > 1 ? <strong>{` (x${s.goals})`}</strong> : null}
+                                                    </Segment>
+                                                ))
+                                            }
+                                        </Segment>
+                                    );
                                 })
                             }
-                        </List>
+                        </Segment.Group>
                     </Accordion.Content>
                 )}
             </div>
