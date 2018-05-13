@@ -25,28 +25,23 @@ class ResultLine extends Component {
         const {active} = this.state;
         const {played, match} = this.props;
         return (
-            <div>
-                <Accordion.Title active={active} onClick={() => this.setState({active: !active})}>
+            <div style={active ? {backgroundColor: '#f9f9f9'} : null}>
+                <Accordion.Title active={active} onClick={played ? () => this.setState({active: !active}) : null}>
                     {played && <Icon name='dropdown'/>}
                     {`${match.home} - ${match.away}`}
-                    <strong>{`${match.homeGoal || 0} - ${match.awayGoal || 0}`}</strong>
+                    <strong style={{marginLeft: '5px'}}>{`${match.homeGoal || 0} - ${match.awayGoal || 0}`}</strong>
                 </Accordion.Title>
                 {played && (
                     <Accordion.Content active={active}>
-                        <List bulleted>
+                        <List>
                             {
-                                this.formatScorers(match.scorers.home).map((s, index) => (
-                                    <List.Item key={index}>
-                                        {`${s.name}${s.goals > 1 ? ` (x${s.goals})` : ''} - ${match.home}`}
-                                    </List.Item>
-                                ))
-                            }
-                            {
-                                this.formatScorers(match.scorers.away).map((s, index) => (
-                                    <List.Item key={index}>
-                                        {`${s.name}${s.goals > 1 ? ` (x${s.goals})` : ''} - ${match.away}`}
-                                    </List.Item>
-                                ))
+                                ['home', 'away'].map(k => {
+                                    return this.formatScorers(match.scorers[k]).map((s, index) => (
+                                        <List.Item key={index} as='li' value='-'>
+                                            {`${s.name}${s.goals > 1 ? ` (x${s.goals})` : ''}`} - <strong>{`${match[k]}`}</strong>
+                                        </List.Item>
+                                    ))
+                                })
                             }
                         </List>
                     </Accordion.Content>
