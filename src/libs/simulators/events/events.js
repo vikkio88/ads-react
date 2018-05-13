@@ -42,10 +42,10 @@ export const seasonOver = ({status, context}) => {
     const news = [
         newsGenerator.generate(
             `Season finished, ${winner.name} won the ${name} ${season}!`,
-            `The ${name} ${season} winner has been announced: ${winner.name} !\n` +
-            `They won the league with ${winner.points} points, seconded by ${second.name} with ${second.points} points.\n` +
-            `${ucFirst(third.name)} classified third instead, with ${third.points} points.\n` +
-            `The scorers table instead was dominated by ${topScorerPlayer} (${topScorer.team}) with ${topScorer.goals} goals.`,
+            `The ${name} ${season} winner has been announced: **${winner.name}** !\n` +
+            `They won the league with **${winner.points}** points, seconded by **${second.name}** with **${second.points}** points.\n` +
+            `**${ucFirst(third.name)}** classified third instead, with **${third.points}** points.\n` +
+            `The scorers table instead was dominated by **${topScorerPlayer}** (**${topScorer.team}**) with **${topScorer.goals}** goals.`,
             today.format(DATE_FORMAT)
         ),
         newsGenerator.generate(

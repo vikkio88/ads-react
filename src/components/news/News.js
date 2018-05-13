@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import MarkdownIt from 'markdown-it';
+import Interweave from 'interweave';
 import {Accordion, Card} from "semantic-ui-react";
 import {randomizer} from "../../libs/generators";
 import {PAYLOAD_TYPES} from "../../libs/helpers/newshelper";
@@ -37,7 +39,10 @@ class NewsView extends Component {
                 <Card.Content>
                     <Card.Meta>{news.date}</Card.Meta>
                     <Card.Description>
-                        {news.message}
+                        <Interweave
+                            tagName="div"
+                            content={(new MarkdownIt()).render(news.message)}
+                        />
                         {news.payload && this.renderPayload(news.payload)}
                     </Card.Description>
                 </Card.Content>
