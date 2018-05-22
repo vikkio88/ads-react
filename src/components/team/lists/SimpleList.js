@@ -38,7 +38,6 @@ class SimpleListView extends Component {
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>#</Table.HeaderCell>
-                            {detailed && (<Table.HeaderCell>Actions</Table.HeaderCell>)}
                             <Table.HeaderCell>Name</Table.HeaderCell>
                             <Table.HeaderCell>#Players</Table.HeaderCell>
                             <Table.HeaderCell>Average Skill</Table.HeaderCell>
@@ -52,12 +51,17 @@ class SimpleListView extends Component {
                                 <Table.Cell>
                                     <Badge colours={t.colours}/>
                                 </Table.Cell>
-                                {detailed && (
-                                    <Table.Cell>
-                                        <Button onClick={() => this.props.teamDetails(t)} icon="magnify"/>
-                                    </Table.Cell>
-                                )}
-                                <Table.Cell>{t.name}</Table.Cell>
+                                <Table.Cell>
+                                    {!detailed && t.name}
+                                    {detailed && (
+                                        <a
+                                            className="navigationLink"
+                                            onClick={() => this.props.teamDetails(t)}
+                                        >
+                                            {t.name}
+                                        </a>
+                                    )}
+                                </Table.Cell>
                                 <Table.Cell>{t.roster.length}</Table.Cell>
                                 <Table.Cell>
                                     <Rating

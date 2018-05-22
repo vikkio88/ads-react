@@ -41,14 +41,17 @@ class SimpleListView extends Component {
                             <Table.HeaderCell>Age</Table.HeaderCell>
                             <Table.HeaderCell>Position</Table.HeaderCell>
                             <Table.HeaderCell>Skill</Table.HeaderCell>
-                            <Table.HeaderCell>Details</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                         {filteredRoster.map(p => (
                             <Table.Row key={p.id} className='hoverableRow'>
                                 <Table.Cell/>
-                                <Table.Cell>{`${p.name} ${p.surname}`}</Table.Cell>
+                                <Table.Cell>
+                                    <a onClick={() => this.props.playerDetails(p)} className="navigationLink">
+                                        {`${p.name} ${p.surname}`}
+                                    </a>
+                                </Table.Cell>
                                 <Table.Cell>
                                     <AdsFlag name={p.nationality}/>
                                 </Table.Cell>
@@ -60,12 +63,6 @@ class SimpleListView extends Component {
                                         disabled
                                         defaultRating={valueToRating(p.skill)}
                                         maxRating={5}
-                                    />
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <Button
-                                        onClick={() => this.props.playerDetails(p)}
-                                        icon="magnify"
                                     />
                                 </Table.Cell>
                             </Table.Row>
