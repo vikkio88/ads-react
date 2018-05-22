@@ -1,5 +1,6 @@
 import {generator} from "../generators/generator";
 import {ulid} from "ulid";
+
 const NEWS_KEY = 'news';
 export const PAYLOAD_TYPES = {
     RESULT: 'result'
@@ -27,5 +28,8 @@ export const newsHelper = {
             }
             return n;
         });
+    },
+    remove(news, list) {
+        return list.filter(n => n.id !== news.id);
     }
 };

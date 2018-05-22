@@ -70,3 +70,13 @@ export const setNewsAsRead = readNews => {
         dispatch(modifyStatus(status));
     };
 };
+
+export const removeNews = newsToRemove => {
+    return (dispatch, getState) => {
+        const {status} = getState().game;
+        let {news} = status;
+        news = newsHelper.remove(newsToRemove, news);
+        status.news = news;
+        dispatch(modifyStatus(status));
+    };
+};

@@ -1,20 +1,31 @@
 import React, {Component} from 'react';
-import {Card, Feed, Icon} from "semantic-ui-react";
+import {Button, Card, Feed, Header, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
 import numeral from "numeral";
 import {navigatePush} from "../../store/actions/navigation";
-import {setNewsAsRead} from "../../store/actions/game";
+import {removeNews, setNewsAsRead} from "../../store/actions/game";
 import {randomizer} from "../../libs/generators";
 import {CURRENCY_MODIFIERS} from "../../const";
 
 class ListView extends Component {
     render() {
-        const {news, readNews} = this.props;
+        const {news, readNews, setAsRead, remove} = this.props;
+        if (!news.length) {
+            return (
+                <Header>
+                    <h2>No news</h2>
+                </Header>
+            );
+        }
         return (
             <Feed>
                 {news.map(n => (
                     <Card color={!n.read ? 'red' : null} fluid key={n.id}>
                         <Feed.Event>
+                            <Feed.Extra style={{display: 'flex', justifyContent: 'flex-end'}}>
+                                {!n.read && <Button icon="checkmark" onClick={() => setAsRead(n)}/>}
+                                <Button icon="trash" onClick={() => remove(n)}/>
+                            </Feed.Extra>
                             <Feed.Label>
                                 <h2><a onClick={() => readNews(n)}>{n.newspaper}</a></h2>
                                 <Icon name="newspaper" size="huge"/>
@@ -48,6 +59,12 @@ const dispatchToProps = dispatch => {
         readNews(news) {
             dispatch(setNewsAsRead(news));
             dispatch(navigatePush('readNews', news));
+        },
+        setAsRead(news) {
+            dispatch(setNewsAsRead(news));
+        },
+        remove(news) {
+            dispatch(removeNews(news));
         }
     };
 };
