@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Input, Rating, Table} from "semantic-ui-react";
+import {Input, Rating, Table} from "semantic-ui-react";
 import {Badge} from "../";
 import {teamHelper} from "../../../libs/helpers";
 import {CURRENCY_MODIFIERS} from "../../../const";
