@@ -56,6 +56,7 @@ class LoginView extends Component {
                 hash: teamHelper.teamsToObject(teams),
                 list: teams
             },
+            players: teamHelper.extractPlayersMap(teams),
             league: {
                 ...baseLeague,
                 table: teamHelper.createCleanTable(teams),

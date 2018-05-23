@@ -1,9 +1,20 @@
 import React, {Component} from 'react';
 import {leagueHelper} from "../../libs/helpers";
 import {Table} from "semantic-ui-react";
+import {connect} from "react-redux";
+import {navigatePush} from "../../store/actions";
 
 
-class Scorers extends Component {
+class ScorersView extends Component {
+    playerDetails(playerId) {
+        const {teamHash, players} = this.props;
+        this.props.playerDetails(
+            teamHash[players[playerId]]
+                .roster
+                .filter(p => p.id === playerId)[0]
+        );
+    }
+
     render() {
         let {scorers} = this.props;
         scorers = leagueHelper.orderedScorers(scorers);
@@ -29,7 +40,11 @@ class Scorers extends Component {
                             scorers.map((s, index) => (
                                 <Table.Row key={index} className="hoverableRow">
                                     <Table.Cell><strong>{index + 1}</strong></Table.Cell>
-                                    <Table.Cell>{`${s.player.name} ${s.player.surname}`}</Table.Cell>
+                                    <Table.Cell>
+                                        <a onClick={() => this.playerDetails(s.player.id)} className="navigationLink">
+                                            {`${s.player.name} ${s.player.surname}`}
+                                        </a>
+                                    </Table.Cell>
                                     <Table.Cell>{s.team}</Table.Cell>
                                     <Table.Cell>{s.goals}</Table.Cell>
                                 </Table.Row>
@@ -41,5 +56,22 @@ class Scorers extends Component {
         );
     }
 }
+
+const stateToProps = ({game}) => {
+    const {teams, players} = game.context;
+    const teamHash = teams.hash;
+    return {
+        teamHash,
+        players
+    };
+};
+const dispatchToProps = dispatch => {
+    return {
+        playerDetails(player) {
+            dispatch(navigatePush('playerDetails', player));
+        }
+    };
+};
+const Scorers = connect(stateToProps, dispatchToProps)(ScorersView);
 
 export {Scorers}

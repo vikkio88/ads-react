@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Table as STable} from 'semantic-ui-react';
 import {leagueHelper} from "../../libs/helpers";
+import {navigatePush} from "../../store/actions";
 
 
-class Table extends Component {
+class TableView extends Component {
+    teamDetails(teamName) {
+        this.props.teamDetails(this.props.teamHash[teamName]);
+    }
+
     render() {
-        let {teams, league} = this.props;
-        teams = leagueHelper.orderedTable(teams);
-        if (!teams.length) return <span/>;
+        const {teams, league} = this.props;
+        const tableTeams = leagueHelper.orderedTable(teams);
+        if (!tableTeams.length) return <span/>;
 
         return (
             <div>
@@ -28,10 +34,14 @@ class Table extends Component {
                     </STable.Header>
                     <STable.Body>
                         {
-                            teams.map((t, index) => (
+                            tableTeams.map((t, index) => (
                                 <STable.Row key={index} className="hoverableRow">
                                     <STable.Cell><strong>{index + 1}</strong></STable.Cell>
-                                    <STable.Cell>{t.name}</STable.Cell>
+                                    <STable.Cell>
+                                        <a className="navigationLink" onClick={() => this.teamDetails(t.name)}>
+                                            {t.name}
+                                        </a>
+                                    </STable.Cell>
                                     <STable.Cell collapsing>{t.points}</STable.Cell>
                                     <STable.Cell>{t.played}</STable.Cell>
                                     <STable.Cell>{t.won}</STable.Cell>
@@ -48,5 +58,21 @@ class Table extends Component {
         );
     }
 }
+
+
+const stateToProps = ({game}) => {
+    const teamHash = game.context.teams.hash;
+    return {
+        teamHash
+    };
+};
+const dispatchToProps = dispatch => {
+    return {
+        teamDetails(team) {
+            dispatch(navigatePush('teamDetails', team));
+        }
+    };
+};
+const Table = connect(stateToProps, dispatchToProps)(TableView);
 
 export {Table};

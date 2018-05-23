@@ -54,10 +54,7 @@ class SimpleListView extends Component {
                                 <Table.Cell>
                                     {!detailed && t.name}
                                     {detailed && (
-                                        <a
-                                            className="navigationLink"
-                                            onClick={() => this.props.teamDetails(t)}
-                                        >
+                                        <a className="navigationLink" onClick={() => this.props.teamDetails(t)}>
                                             {t.name}
                                         </a>
                                     )}

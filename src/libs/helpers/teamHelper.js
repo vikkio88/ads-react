@@ -4,6 +4,15 @@ import {positions} from '../../const';
 import {byPlayerAbilityToScore, byPlayerSkill, onlyPlayerPosition} from "../utils";
 
 const teamHelper = {
+    extractPlayersMap(teams) {
+        const players = {};
+        teams.forEach(t => {
+            t.roster.forEach(p => {
+                players[p.id] = t.name;
+            });
+        });
+        return players;
+    },
     createCleanTable(teams) {
         const table = {};
         teams.forEach(t => {
