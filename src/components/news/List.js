@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Card, Feed, Header, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
-import numeral from "numeral";
 import {navigatePush} from "../../store/actions/navigation";
 import {removeNews, setNewsAsRead} from "../../store/actions/game";
-import {randomizer} from "../../libs/generators";
-import {CURRENCY_MODIFIERS} from "../../const";
 
 class ListView extends Component {
     render() {
@@ -28,19 +25,13 @@ class ListView extends Component {
                             </Feed.Extra>
                             <Feed.Label>
                                 <h2><a onClick={() => readNews(n)}>{n.newspaper}</a></h2>
-                                <Icon name="newspaper" size="huge"/>
+                                <Icon name="newspaper" size="big"/>
                             </Feed.Label>
                             <Feed.Content>
                                 <Feed.Date>{n.date}</Feed.Date>
                                 <Feed.Summary>
                                     <h2>{n.title}</h2>
                                 </Feed.Summary>
-                                <Feed.Meta>
-                                    <Feed.Like>
-                                        <Icon name='like'/>
-                                        {numeral(randomizer.int(1, 500) * CURRENCY_MODIFIERS.THOUSANDS).format('0a')} Likes
-                                    </Feed.Like>
-                                </Feed.Meta>
                             </Feed.Content>
                         </Feed.Event>
                     </Card>
