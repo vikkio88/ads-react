@@ -49,7 +49,8 @@ class DetailsView extends Component {
                         <Segment>
                             <h2>Current Season</h2>
                             <ValueLine.Group>
-                                <ValueLine label="Match played" value={lineups[player.id] || 0}/>
+                                <ValueLine label="Rate" value={(lineups[player.id] || {}).rating || '-'}/>
+                                <ValueLine label="Match played" value={(lineups[player.id] || {}).played || 0}/>
                                 <ValueLine
                                     label="Goal Scored"
                                     value={(scorers[player.id] && scorers[player.id].goals) || 0}

@@ -23,3 +23,9 @@ export const baseGameStatus = {
         player: []
     }
 };
+
+
+export const playerMatchStatBase = {
+    played: 1,
+    rating: 0
+};

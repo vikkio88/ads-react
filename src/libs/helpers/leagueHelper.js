@@ -1,11 +1,12 @@
 import moment from "moment";
-import {generator} from '../generators';
+import {generator, randomizer} from '../generators';
 import {playerHelper} from './playerHelper';
 import {teamHelper} from './teamHelper';
 import {round} from '../simulators';
 import {newsGenerator, PAYLOAD_TYPES} from './newshelper';
 import {DATE_FORMAT} from '../../const';
 import {tableOrdering} from "../utils";
+import {playerMatchStatBase} from "../models";
 
 const LOSER_MODIFIERS = {
     decreases: [
@@ -108,10 +109,11 @@ const leagueHelper = {
             const {lineups} = r;
             lineups.forEach(l => {
                 if (oldLineups[l]) {
-                    oldLineups[l]++;
+                    oldLineups[l].played++;
                 } else {
-                    oldLineups[l] = 1;
+                    oldLineups[l] = {...playerMatchStatBase};
                 }
+                oldLineups[l].rating = (randomizer.int(4, 9) + oldLineups[l].rating) / oldLineups[l].played
             });
         });
         return oldLineups;
