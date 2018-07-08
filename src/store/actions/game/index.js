@@ -9,6 +9,9 @@ export const NEW_GAME = 'new_game';
 export const LOAD_GAME = 'load_game';
 export const NEXT_DAY = 'next_day';
 export const MODIFY_STATUS = 'modify_status';
+export const LOADING_START = 'loading_start';
+export const LOADING_FINISHED = 'loading_finished';
+
 
 export const loadGame = () => {
         const game = gameHelper.loadGame();
@@ -41,13 +44,46 @@ export const newGame = data => {
     }
 };
 
-export const nextDay = game => {
+export const fastForward = () => {
+    return (dispatch, getState) => {
+        let {game} = getState();
+        dispatch(loadingStart());
+        for (let i = 0; i < 7; i++) {
+            game = day.simulate(game);
+        }
+        dispatch(simulatingTimeFinished(game));
+        setTimeout(() => dispatch(loadingFinished()), 1500);
+    };
+};
+
+export const loadingStart = () => {
+    return {
+        type: LOADING_START
+    }
+};
+
+export const loadingFinished = () => {
+    return {
+        type: LOADING_FINISHED
+    }
+};
+
+export const nextDay = () => {
+    return (dispatch, getState) => {
+        const {game} = getState();
+        dispatch(loadingStart());
+        dispatch(simulatingTimeFinished(...day.simulate(game)));
+        setTimeout(() => dispatch(loadingFinished()), 600);
+    };
+};
+
+export const simulatingTimeFinished = game => {
     return {
         type: NEXT_DAY,
         data: {
-            ...day.simulate(game)
+            ...game
         }
-    };
+    }
 };
 
 export const modifyStatus = status => {

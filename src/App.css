@@ -5,3 +5,8 @@
 .navigationLink:hover {
     cursor: pointer;
 }
+
+.mainLoader {
+    width: 100vw;
+    height: 100vh;
+}

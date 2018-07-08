@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Dashboard, Mail, News, Calendar, Database} from './';
-import {Button, Container, Icon, Menu} from "semantic-ui-react";
+import {Button, Container, Dimmer, Icon, Loader, Menu} from "semantic-ui-react";
 import {Login} from "./Login";
 import {navigatePop} from "../store/actions";
 
@@ -10,6 +10,7 @@ import {News as ReadNews} from "../components/news";
 import {Details as TeamDetails} from "../components/team";
 import {Details as PlayerDetails} from "../components/player";
 import {Details as CoachDetails} from "../components/coach";
+import {DATE_FORMAT} from "../const";
 
 const componentMap = {
     'mail': <Mail/>,
@@ -28,9 +29,9 @@ const componentMap = {
 
 
 class MainScreenView extends Component {
-    render() {
-        const viewComponent = componentMap[this.props.view];
-        const {loggedIn} = this.props;
+    getMainScreen() {
+        const {loggedIn, view} = this.props;
+        const viewComponent = componentMap[view];
         if (viewComponent) {
             return (
                 <div>
@@ -49,22 +50,42 @@ class MainScreenView extends Component {
 
         return loggedIn ? <Dashboard/> : <Login/>;
     }
+
+    render() {
+        const {loading, date} = this.props;
+        return (
+            <Dimmer.Dimmable as="div" dimmed={loading} className="mainLoader">
+                <Dimmer active={loading} inverted>
+                    <Loader>
+                        Simulating until...
+                        <h1>{date && date.format(DATE_FORMAT)}</h1>
+                    </Loader>
+                </Dimmer>
+                {this.getMainScreen()}
+            </Dimmer.Dimmable>
+        );
+    }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         back() {
-            dispatch(navigatePop())
+            dispatch(navigatePop());
         }
     };
 };
 const mapStateToProps = ({navigation, game}) => {
-    const loggedIn = Object.keys(game).length > 0;
-    return {
-        view: navigation.view,
-        loggedIn
+        const loggedIn = Object.keys(game).length > 0;
+        const {loading} = game;
+        const {date} = (game.status || {});
+        return {
+            view: navigation.view,
+            loggedIn,
+            loading,
+            date
+        }
     }
-};
+;
 const MainScreen = connect(mapStateToProps, mapDispatchToProps)(MainScreenView);
 export {MainScreen};
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Container, Grid, Icon, Menu} from "semantic-ui-react";
 import {AppIcon} from "../components";
 import {connect} from "react-redux";
-import {nextDay} from "../store/actions";
+import {nextDay, fastForward} from "../store/actions";
 import {DATE_FORMAT} from "../const";
 import {getApps} from "../libs/helpers";
 import {deleteGame, saveGame} from "../libs/helpers/gameHelper";
@@ -14,7 +14,7 @@ class DashboardView extends Component {
     }
 
     render() {
-        const {nextDay, game} = this.props;
+        const {nextDay, fastForward, game} = this.props;
         const {player, date, messages, news, team} = game.status;
         const applications = getApps({messages, news});
         return (
@@ -51,11 +51,19 @@ class DashboardView extends Component {
                     <Menu.Menu position="right">
                         <Button
                             fluid
-                            size="massive"
-                            onClick={() => nextDay(game)}
+                            size="big"
+                            onClick={() => nextDay()}
                         >
                             Next Day <Icon name="step forward"/>
                         </Button>
+                        <Button
+                            fluid
+                            size="huge"
+                            onClick={() => fastForward()}
+                        >
+                            Next Week <Icon name="fast forward"/>
+                        </Button>
+
                     </Menu.Menu>
                 </Menu>
             </div>
@@ -70,8 +78,11 @@ const stateToProps = ({game}) => {
 };
 const dispatchToProps = dispatch => {
     return {
-        nextDay(game) {
-            dispatch(nextDay(game));
+        nextDay() {
+            dispatch(nextDay());
+        },
+        fastForward() {
+            dispatch(fastForward())
         }
     };
 };
