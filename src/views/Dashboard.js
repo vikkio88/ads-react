@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Container, Grid, Icon, Menu} from "semantic-ui-react";
-import {AppIcon} from "../components";
+import {AppIcon} from "../components/common";
 import {connect} from "react-redux";
 import {nextDay, fastForward} from "../store/actions";
 import {DATE_FORMAT} from "../const";
