@@ -26,11 +26,14 @@ class ResultLine extends Component {
         const {played, match} = this.props;
         return (
             <div>
-                <Accordion.Title as="h4" active={active}
-                                 onClick={played ? () => this.setState({active: !active}) : null}>
+                <Accordion.Title
+                    as="h4" active={active}
+                    onClick={played ? () => this.setState({active: !active}) : null}
+                >
                     {played && <Icon name='dropdown'/>}
                     {`${match.home} - ${match.away}`}
-                    <strong style={{marginLeft: '5px'}}>{`${match.homeGoal || 0} - ${match.awayGoal || 0}`}</strong>
+                    {played &&
+                    <strong style={{marginLeft: '5px'}}>{`${match.homeGoal || 0} - ${match.awayGoal || 0}`}</strong>}
                 </Accordion.Title>
                 {played && (
                     <Accordion.Content active={active}>
