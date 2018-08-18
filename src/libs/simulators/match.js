@@ -51,6 +51,9 @@ const match = {
         homeGoal = homeGoal < 0 ? 0 : homeGoal;
         awayGoal = awayGoal < 0 ? 0 : awayGoal;
 
+        homeGoal = homeGoal > 4 && randomizer.chance(80) ? randomizer.int(1, 4) : homeGoal;
+        awayGoal = awayGoal > 4 && randomizer.chance(80) ? randomizer.int(1, 4) : awayGoal;
+
 
         if (homeGoal < awayGoal) {
             loser = homeTeam.name;
