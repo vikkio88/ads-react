@@ -65,19 +65,23 @@ class Stats extends Component {
             },
         };
 
-        const chart = new ApexCharts(
+        this.chart = new ApexCharts(
             document.querySelector("#chart"),
             options
         );
 
-        chart.render();
+        this.chart.render();
+    }
+
+    componentWillUnmount() {
+        this.chart.destroy();
     }
 
     render() {
-        const {stats} = this.props;
+        const {stats, team} = this.props;
         return (
             <div>
-                <h1>Statistics</h1>
+                <h1>{team} Statistics</h1>
                 {stats.positionTrend && (
                     <div>
                         <h2>Position Trend</h2>

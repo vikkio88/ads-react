@@ -18,7 +18,7 @@ class DetailsView extends Component {
             {
                 menuItem: "Stats", render: () => (
                     <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
-                        <Stats stats={stats}/>
+                        <Stats team={team.name} stats={stats}/>
                     </Tab.Pane>
                 )
             },
