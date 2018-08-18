@@ -26,12 +26,7 @@ export const game = (state = initialState, action) => {
                 ...action.data
             }
         }
-        case NEXT_DAY: {
-            return {
-                ...state,
-                ...action.data
-            }
-        }
+        case NEXT_DAY:
         case NEW_GAME: {
             return {
                 ...state,
