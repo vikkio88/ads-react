@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {SimpleList} from "../components/team";
 import {Tab} from "semantic-ui-react";
-import {Fixture, Panel} from "../components/league";
+import {Fixture, LeagueInfo} from "../components/league";
 
 
 class DatabaseView extends Component {
@@ -19,12 +19,12 @@ class DatabaseView extends Component {
             {
                 menuItem: "League Tables", render: () => (
                     <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
-                        <Panel league={league} table={table} scorers={scorers}/>
+                        <LeagueInfo league={league} table={table} scorers={scorers}/>
                     </Tab.Pane>
                 )
             },
             {
-                menuItem: "League Calendar", render: () => (
+                menuItem: "Calendar", render: () => (
                     <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
                         <Fixture fixture={fixture}/>
                     </Tab.Pane>
