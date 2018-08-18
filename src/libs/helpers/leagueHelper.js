@@ -113,7 +113,7 @@ const leagueHelper = {
                 } else {
                     oldLineups[l] = {...playerMatchStatBase};
                 }
-                oldLineups[l].rating = (randomizer.int(4, 9) + oldLineups[l].rating) / oldLineups[l].played
+                oldLineups[l].rating = (randomizer.int(4, 9) + (oldLineups[l].rating * (oldLineups[l].played - 1))) / oldLineups[l].played;
             });
         });
         return oldLineups;

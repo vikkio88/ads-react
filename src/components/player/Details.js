@@ -49,7 +49,7 @@ class DetailsView extends Component {
                         <Segment>
                             <h2>Current Season</h2>
                             <ValueLine.Group>
-                                <ValueLine label="Rate" value={(lineups[player.id] || {}).rating || '-'}/>
+                                <ValueLine label="Rate" value={((lineups[player.id] || {}).rating).toFixed(2) || '-'}/>
                                 <ValueLine label="Match played" value={(lineups[player.id] || {}).played || 0}/>
                                 <ValueLine
                                     label="Goal Scored"
