@@ -1,44 +1,95 @@
 import React, {Component} from 'react';
-import {VictoryChart, VictoryLine, VictoryLabel, VictoryAxis} from 'victory'
 import {TEAM_NUMBER} from "../../const";
+import {rangeArray} from "uvk";
+import ApexCharts from 'apexcharts';
+
 
 class Stats extends Component {
+    componentDidMount() {
+        const {stats} = this.props;
+        if (!stats.positionTrend) {
+            return;
+        }
+        const options = {
+            chart: {
+                height: 500,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                enabled: true,
+                x: {
+                    show: false
+                }
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            series: [
+                {
+                    name: 'Position',
+                    data: stats.positionTrend.map(p => TEAM_NUMBER - p + 1),
+                }
+            ],
+            xaxis: {
+                categories: rangeArray(stats.positionTrend.length),
+                title: {
+                    text: 'Game Week'
+                }
+            },
+            yaxis: {
+                max: TEAM_NUMBER,
+                min: 1,
+                labels: {
+                    formatter(value) {
+                        return Math.round(TEAM_NUMBER - value + 1);
+                    }
+                },
+                title: {
+                    text: 'Table Position'
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+        };
+
+        const chart = new ApexCharts(
+            document.querySelector("#chart"),
+            options
+        );
+
+        chart.render();
+    }
+
     render() {
         const {stats} = this.props;
-        const ROUND_NUMBER = (TEAM_NUMBER * 2) - 2;
         return (
             <div>
                 <h1>Statistics</h1>
                 {stats.positionTrend && (
                     <div>
                         <h2>Position Trend</h2>
-                        <VictoryChart>
-                            <VictoryLine
-                                domain={{x: [1, ROUND_NUMBER], y: [1, 18]}}
-                                style={{
-                                    data: {stroke: 'orange'}
-                                }}
-                                labels={d => d[1]}
-                                labelComponent={<VictoryLabel renderInPortal style={{fontSize: '6px'}} dy={-2}/>}
-                                data={stats.positionTrend.map((p, i) => [i + 1, p])}
-                                x={0}
-                                y={d => TEAM_NUMBER - d[1] + 1}
-                            />
-                            <VictoryAxis
-                                crossAxis
-                                label="Rounds"
-                                tickValues={[1, ROUND_NUMBER / 2, ROUND_NUMBER]}
-                                style={{
-                                    tickLabels: {fontSize: 5, padding: 5},
-                                    axisLabel: {fontSize: 8, padding: 10},
-                                }}
-                            />
-                        </VictoryChart>
+                        <div id="chart"/>
                     </div>
-                )}
+                )
+                }
             </div>
         );
     }
 }
 
-export {Stats};
+export {
+    Stats
+};
