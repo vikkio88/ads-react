@@ -8,6 +8,7 @@ import {formatCurrency, percentageToColour, valueToRating} from "../../libs/util
 class DetailsView extends Component {
     render() {
         const {player, inPlayersTeam, lineups, scorers} = this.props;
+        const rating = ((lineups[player.id] || {}).rating) ? ((lineups[player.id] || {}).rating).toFixed(2) : null;
         return (
             <Container fluid>
                 <Segment.Group>
@@ -49,7 +50,7 @@ class DetailsView extends Component {
                         <Segment>
                             <h2>Current Season</h2>
                             <ValueLine.Group>
-                                <ValueLine label="Rate" value={((lineups[player.id] || {}).rating).toFixed(2) || '-'}/>
+                                <ValueLine label="Rate" value={rating || '-'}/>
                                 <ValueLine label="Match played" value={(lineups[player.id] || {}).played || 0}/>
                                 <ValueLine
                                     label="Goal Scored"
