@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Container, Divider, Dropdown, Form, Icon, Menu} from "semantic-ui-react";
+import {Button, Container, Divider, Dropdown, Form, Icon, Menu, Segment} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {ucFirst} from 'uvk';
 
@@ -7,7 +7,7 @@ import {newGame} from "../store/actions";
 import {nationalitiesArray, TEAM_NUMBER} from "../const";
 import {generator} from "../libs/generators";
 import {teamHelper} from "../libs/helpers/teamHelper";
-import {SimpleList} from "../components/team";
+import {ShallowList} from "../components/team";
 import {baseLeague} from "../libs/models";
 
 const formattedNationalities = nationalitiesArray.map(n => {
@@ -84,7 +84,7 @@ class LoginView extends Component {
                 <Menu className="top fixed">
                     <h1>Athletic Director Simulator</h1>
                 </Menu>
-                <Container textAlign="center" style={{marginTop: '60px'}}>
+                <Container textAlign="center" style={{marginTop: '60px', marginBottom: '80px'}}>
                     <h3>Insert your details</h3>
                     <Form>
                         <Form.Field>
@@ -117,21 +117,20 @@ class LoginView extends Component {
                         <Button disabled={!nationality} onClick={() => this.generateLeague()}>
                             Generate teams
                         </Button>
-                        <Menu className="bottom fixed">
-                            <Menu.Menu position="right">
-                                <Button
-                                    size="massive"
-                                    fluid
-                                    disabled={this.isFormInvalid()}
-                                    onClick={() => this.newGame()}
-                                >
-                                    Start <Icon name="step forward"/>
-                                </Button>
-                            </Menu.Menu>
-                        </Menu>
-                        <SimpleList teams={teams}/>
+                        <ShallowList teams={teams}/>
                     </Form>
                 </Container>
+                <Menu className="bottom fixed">
+                    <Menu.Menu position="right">
+                        <Button
+                            size="huge"
+                            fluid
+                            disabled={this.isFormInvalid()}
+                            onClick={() => this.newGame()}
+                            icon="right chevron"
+                        />
+                    </Menu.Menu>
+                </Menu>
             </div>
         );
     }
