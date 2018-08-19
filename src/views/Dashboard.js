@@ -3,7 +3,7 @@ import {Button, Container, Grid, Icon, Menu} from "semantic-ui-react";
 import {AppIcon} from "../components/common";
 import {connect} from "react-redux";
 import {nextDay, fastForward} from "../store/actions";
-import {DATE_FORMAT} from "../const";
+import {DATE_FORMAT_DOW} from "../const";
 import {getApps} from "../libs/helpers";
 import {deleteGame, saveGame} from "../libs/helpers/gameHelper";
 
@@ -30,7 +30,7 @@ class DashboardView extends Component {
                     </Menu.Menu>
                     <Menu.Menu position="right">
                         <h3 style={{marginRight: '25px'}}>
-                            {date && date.format(DATE_FORMAT)}
+                            {date && date.format(DATE_FORMAT_DOW)}
                         </h3>
                     </Menu.Menu>
                 </Menu>

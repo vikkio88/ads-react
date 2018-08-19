@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Dashboard, Mail, News, Calendar, Database} from './';
-import {Button, Container, Dimmer, Icon, Loader, Menu} from "semantic-ui-react";
+import {Button, Container, Dimmer, Loader, Menu} from "semantic-ui-react";
 import {Login} from "./Login";
-import {navigatePop} from "../store/actions";
+import {navigatePop, navigate} from "../store/actions";
 
 import {News as ReadNews} from "../components/news";
 
 import {Details as TeamDetails} from "../components/team";
 import {Details as PlayerDetails} from "../components/player";
 import {Details as CoachDetails} from "../components/coach";
-import {DATE_FORMAT} from "../const";
+import {DATE_FORMAT, DATE_FORMAT_DOW} from "../const";
 
 const componentMap = {
     'mail': <Mail/>,
@@ -30,15 +30,21 @@ const componentMap = {
 
 class MainScreenView extends Component {
     getMainScreen() {
-        const {loggedIn, view} = this.props;
+        const {loggedIn, view, date, back, toDashboard} = this.props;
         const viewComponent = componentMap[view];
         if (viewComponent) {
             return (
                 <div>
                     <Menu className="top fixed">
-                        <Button fluid onClick={() => this.props.back()} size="massive">
-                            <Icon name="step backward"/> Back
-                        </Button>
+                        <Menu.Menu position="left">
+                            <Button onClick={() => back()} size="big" icon="step backward"/>
+                            <Button icon="home" onClick={() => toDashboard()} size="big"/>
+                        </Menu.Menu>
+                        <Menu.Menu position="right">
+                            <h4 style={{marginRight: '15px'}}>
+                                {date.format(DATE_FORMAT_DOW)}
+                            </h4>
+                        </Menu.Menu>
                     </Menu>
                     <Container style={{marginTop: '80px'}} textAlign="center">
                         {viewComponent}
@@ -71,6 +77,9 @@ const mapDispatchToProps = dispatch => {
     return {
         back() {
             dispatch(navigatePop());
+        },
+        toDashboard() {
+            dispatch(navigate(null))
         }
     };
 };

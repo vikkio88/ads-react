@@ -117,21 +117,21 @@ class LoginView extends Component {
                         <Button disabled={!nationality} onClick={() => this.generateLeague()}>
                             Generate teams
                         </Button>
+                        <Menu className="bottom fixed">
+                            <Menu.Menu position="right">
+                                <Button
+                                    size="massive"
+                                    fluid
+                                    disabled={this.isFormInvalid()}
+                                    onClick={() => this.newGame()}
+                                >
+                                    Start <Icon name="step forward"/>
+                                </Button>
+                            </Menu.Menu>
+                        </Menu>
                         <SimpleList teams={teams}/>
                     </Form>
                 </Container>
-                <Menu className="bottom fixed">
-                    <Menu.Menu position="right">
-                        <Button
-                            size="massive"
-                            fluid
-                            disabled={this.isFormInvalid()}
-                            onClick={() => this.newGame()}
-                        >
-                            Start <Icon name="step forward"/>
-                        </Button>
-                    </Menu.Menu>
-                </Menu>
             </div>
         );
     }
