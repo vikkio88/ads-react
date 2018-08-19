@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
-import {Button, Card, Feed, Header, Icon} from "semantic-ui-react";
+import {Button, Card, Feed, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {navigatePush} from "../../store/actions/navigation";
 import {removeNews, setNewsAsRead} from "../../store/actions/game";
+import {Empty} from "../common";
 
 class ListView extends Component {
     render() {
         const {news, readNews, setAsRead, remove} = this.props;
         if (!news.length) {
-            return (
-                <Header>
-                    <h2>No news</h2>
-                </Header>
-            );
+            return <Empty icon="newspaper" text="No News"/>;
         }
         return (
             <Feed>

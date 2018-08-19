@@ -3,6 +3,7 @@ import {leagueHelper} from "../../libs/helpers";
 import {Table} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {navigatePush} from "../../store/actions";
+import {Empty} from "../common";
 
 
 class ScorersView extends Component {
@@ -19,7 +20,7 @@ class ScorersView extends Component {
         let {scorers} = this.props;
         scorers = leagueHelper.orderedScorers(scorers);
         if (!scorers.length) {
-            return <span/>;
+            return <Empty icon="users" text="No Scorers"/>;
         }
         scorers = scorers.slice(0, 15);
 

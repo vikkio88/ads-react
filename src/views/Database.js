@@ -10,13 +10,6 @@ class DatabaseView extends Component {
     getTabs({teams, table, scorers, league, fixture}) {
         return [
             {
-                menuItem: "Teams", render: () => (
-                    <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
-                        <SimpleList teams={teams} detailed/>
-                    </Tab.Pane>
-                )
-            },
-            {
                 menuItem: "League Tables", render: () => (
                     <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
                         <LeagueInfo league={league} table={table} scorers={scorers}/>
@@ -30,6 +23,13 @@ class DatabaseView extends Component {
                     </Tab.Pane>
                 )
             },
+            {
+                menuItem: "Teams", render: () => (
+                    <Tab.Pane style={{overflowY: 'auto', whiteSpace: 'nowrap'}}>
+                        <SimpleList teams={teams} detailed/>
+                    </Tab.Pane>
+                )
+            }
         ];
     }
 
