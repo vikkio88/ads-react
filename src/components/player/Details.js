@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {Container, Progress, Rating, Segment, Icon, Menu} from "semantic-ui-react";
+import {Container, Progress, Rating, Segment, Icon} from "semantic-ui-react";
 import {AdsFlag, ValueLine} from "../common";
 import {extendedPositions} from "../../const";
 import {formatCurrency, percentageToColour, valueToRating} from "../../libs/utils";
