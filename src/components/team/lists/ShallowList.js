@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, Icon, Rating} from 'semantic-ui-react';
+import {List, Rating} from 'semantic-ui-react';
 import {Badge} from "..";
 import {valueToRating} from "../../../libs/utils";
 import {teamHelper} from "../../../libs/helpers";

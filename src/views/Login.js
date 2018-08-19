@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Container, Divider, Dropdown, Form, Icon, Menu, Segment} from "semantic-ui-react";
+import {Button, Container, Divider, Dropdown, Form, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {ucFirst} from 'uvk';
 
