@@ -1,31 +1,37 @@
 import React, {Component} from 'react';
-import {Input, Rating, Table} from "semantic-ui-react";
-import {extendedPositions} from "../../../const";
-import {valueToRating} from "../../../libs/utils";
+import {Input, Table} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {navigatePush} from "../../../store/actions";
 import {AdsFlag} from "../../common";
 
-class SimpleListView extends Component {
+class StatsListView extends Component {
     constructor(props) {
         super(props);
+        let {roster, lineups, scorers} = this.props;
+        roster = this.attachStatsToRoster(lineups, scorers, roster);
         this.state = {
             filter: '',
             field: null,
             direction: null,
-            roster: this.props.roster
+            roster
         }
+    }
+
+    attachStatsToRoster(lineups, scorers, roster) {
+        return roster.map(p => {
+            return {
+                ...p,
+                played: lineups[p.id] ? lineups[p.id].played : 0,
+                rating: lineups[p.id] ? lineups[p.id].rating : 0,
+                goals: scorers[p.id] ? scorers[p.id].goals : 0
+            }
+        });
     }
 
     handleSort(clickedColumn) {
         let {roster, field, direction} = this.state;
         if (field !== clickedColumn) {
-            roster = roster.sort(
-                clickedColumn !== 'position' ?
-                    ((p, p2) => p[clickedColumn] >= p2[clickedColumn] ? 1 : -1)
-                    :
-                    ((p, p2) => extendedPositions[p.position].weight >= extendedPositions[p2.position].weight ? 1 : -1)
-            );
+            roster = roster.sort((p, p2) => p[clickedColumn] >= p2[clickedColumn] ? 1 : -1);
             this.setState({
                 roster,
                 field: clickedColumn,
@@ -70,22 +76,22 @@ class SimpleListView extends Component {
                                 Name
                             </Table.HeaderCell>
                             <Table.HeaderCell
-                                sorted={field === 'age' ? direction : null}
-                                onClick={() => this.handleSort('age')}
+                                sorted={field === 'played' ? direction : null}
+                                onClick={() => this.handleSort('played')}
                             >
-                                Age
+                                Played
                             </Table.HeaderCell>
                             <Table.HeaderCell
-                                sorted={field === 'position' ? direction : null}
-                                onClick={() => this.handleSort('position')}
+                                sorted={field === 'goals' ? direction : null}
+                                onClick={() => this.handleSort('goals')}
                             >
-                                Position
+                                Goals
                             </Table.HeaderCell>
                             <Table.HeaderCell
-                                sorted={field === 'skill' ? direction : null}
-                                onClick={() => this.handleSort('skill')}
+                                sorted={field === 'rating' ? direction : null}
+                                onClick={() => this.handleSort('rating')}
                             >
-                                Skill
+                                Rating
                             </Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
@@ -97,16 +103,9 @@ class SimpleListView extends Component {
                                         <AdsFlag name={p.nationality}/> {`${p.name} ${p.surname}`}
                                     </a>
                                 </Table.Cell>
-                                <Table.Cell>{p.age}</Table.Cell>
-                                <Table.Cell>{extendedPositions[p.position].description}</Table.Cell>
-                                <Table.Cell>
-                                    <Rating
-                                        icon="star"
-                                        disabled
-                                        defaultRating={valueToRating(p.skill)}
-                                        maxRating={5}
-                                    />
-                                </Table.Cell>
+                                <Table.Cell>{p.played}</Table.Cell>
+                                <Table.Cell>{p.goals}</Table.Cell>
+                                <Table.Cell>{p.rating > 0 ? p.rating : '-'}</Table.Cell>
                             </Table.Row>
                         ))}
                     </Table.Body>
@@ -116,8 +115,13 @@ class SimpleListView extends Component {
     }
 }
 
-const stateToProps = () => {
-    return {}
+const stateToProps = ({game}) => {
+    const {context} = game;
+    const {lineups, scorers} = context.league;
+    return {
+        lineups,
+        scorers
+    };
 };
 const dispatchToProps = dispatch => {
     return {
@@ -126,5 +130,5 @@ const dispatchToProps = dispatch => {
         }
     };
 };
-const SimpleList = connect(stateToProps, dispatchToProps)(SimpleListView);
-export {SimpleList};
+const StatsList = connect(stateToProps, dispatchToProps)(StatsListView);
+export {StatsList};
