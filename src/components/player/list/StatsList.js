@@ -105,7 +105,7 @@ class StatsListView extends Component {
                                 </Table.Cell>
                                 <Table.Cell>{p.played}</Table.Cell>
                                 <Table.Cell>{p.goals}</Table.Cell>
-                                <Table.Cell>{p.rating > 0 ? p.rating : '-'}</Table.Cell>
+                                <Table.Cell>{p.rating > 0 ? p.rating.toFixed(2) : '-'}</Table.Cell>
                             </Table.Row>
                         ))}
                     </Table.Body>
