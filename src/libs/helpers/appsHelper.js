@@ -27,6 +27,11 @@ const apps = [
         icon: "database",
         label: "Database"
     },
+    {
+        name: "info",
+        icon: "info circle",
+        label: "Info"
+    },
 ];
 
 export const getApps = notifications => {

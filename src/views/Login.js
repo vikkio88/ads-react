@@ -9,6 +9,7 @@ import {generator} from "../libs/generators";
 import {teamHelper} from "../libs/helpers/teamHelper";
 import {ShallowList} from "../components/team";
 import {baseLeague} from "../libs/models";
+import {GAME_NAME} from "../config";
 
 const formattedNationalities = nationalitiesArray.map(n => {
     const {flag, name} = n;
@@ -82,7 +83,7 @@ class LoginView extends Component {
         return (
             <div>
                 <Menu className="top fixed">
-                    <h1>Athletic Director Simulator</h1>
+                    <h1>{GAME_NAME}</h1>
                 </Menu>
                 <Container textAlign="center" style={{marginTop: '60px', marginBottom: '80px'}}>
                     <h3>Insert your details</h3>

@@ -1,5 +1,5 @@
 # ads-react
-athletic director simulator with react
+football director simulator.
 
 ## Screenshots
 Some dev screenshots
