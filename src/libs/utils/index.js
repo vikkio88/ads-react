@@ -1,4 +1,6 @@
 import numeral from 'numeral';
+import objectPath from 'object-path';
+
 import {teamHelper} from "../helpers/teamHelper";
 import {extendedPositions} from "../../const";
 
@@ -54,3 +56,7 @@ export const byPlayerPosition = (player, other) => {
 };
 export const byPlayerSkill = (player, other) => player.skill <= other.skill ? 1 : -1;
 export const onlyPlayerPosition = position => player => player.position === position;
+
+export const setValue = (obj, propertyPath, value) => objectPath.set(obj, propertyPath, value);
+export const getValue = (obj, propertyPath) => objectPath.get(obj, propertyPath, null);
+
