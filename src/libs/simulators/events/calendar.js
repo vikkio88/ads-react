@@ -49,8 +49,38 @@ const marketClose = ({status, context}) => {
     return {status, context, news};
 };
 
+const marketOpen = ({status, context}) => {
+    status = {
+        ...status,
+        marketOpen: true
+    };
+
+    const news = newsGenerator.generate(
+        'Transfer Market Opens!',
+        'Transfer Market officially opens',
+        moment(status.date).format(DATE_FORMAT)
+    );
+
+    return {status, context, news};
+};
+
 
 export const triggerDates = {
+    '01-06': [marketOpen],
     '30-07': [buildFixture],
     '01-09': [marketClose],
+    '01-01': [marketOpen],
+    '31-01': [marketClose],
 };
+
+export const triggerDatesDescription = [
+    {
+        '01-06': 'Transfer Market Opens',
+        '30-07': 'Calendar Presented',
+        '01-09': 'Transfer Market Closes',
+    },
+    {
+        '01-01': 'Transfer Market Opens (Winter Session)',
+        '31-01': 'Transfer Market Closes (Winter Session)',
+    }
+];
