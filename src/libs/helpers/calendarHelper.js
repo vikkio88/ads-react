@@ -5,68 +5,38 @@ import {getValue, setValue} from "../utils";
 import {triggerDatesDescription} from "../simulators/events";
 
 export const calendarHelper = {
+    appendEvent(date, event, normalizedEvents) {
+        const year = date.format(YEAR);
+        const month = date.format(MONTH_LONG);
+        const day = date.format('D');
+        const path = `${year}.${month}.${day}`;
+        if (getValue(normalizedEvents, path)) {
+            getValue(normalizedEvents, path).push(event)
+        } else {
+            setValue(normalizedEvents, `${year}.${month}.${day}`, [event]);
+        }
+    },
     normalizeEvents(fixtures, info = {}) {
         const normalizedEvents = {};
         fixtures.forEach(f => {
             const date = moment(f.date);
-            const year = date.format(YEAR);
-            const month = date.format(MONTH_LONG);
-            const day = date.format('D');
-            const path = `${year}.${month}.${day}`;
-            const fixtureEvent = `${info.name} ${info.season} - Matchday ${f.index + 1}`;
-            if (getValue(normalizedEvents, path)) {
-                getValue(normalizedEvents, path).push(fixtureEvent)
-            } else {
-                setValue(normalizedEvents, `${year}.${month}.${day}`, [fixtureEvent]);
-            }
+            this.appendEvent(date, `${info.name} ${info.season} - Matchday ${f.index + 1}`, normalizedEvents);
         });
 
         const triggersFirstHalf = triggerDatesDescription[0];
         const triggersSecondHalf = triggerDatesDescription[1];
-        Object.keys(triggersFirstHalf).forEach(partialDate => {
-            const date = moment(`${partialDate}-${info.startYear}`, DATE_FORMAT);
-            const year = date.format(YEAR);
-            const month = date.format(MONTH_LONG);
-            const day = date.format('D');
-            const path = `${year}.${month}.${day}`;
-            if (getValue(normalizedEvents, path)) {
-                getValue(normalizedEvents, path).push(triggersFirstHalf[partialDate])
-            } else {
-                setValue(normalizedEvents, `${year}.${month}.${day}`, [triggersFirstHalf[partialDate]]);
-            }
-        });
-
-        Object.keys(triggersSecondHalf).forEach(partialDate => {
-            const date = moment(`${partialDate}-${info.finishYear}`, DATE_FORMAT);
-            const year = date.format(YEAR);
-            const month = date.format(MONTH_LONG);
-            const day = date.format('D');
-            const path = `${year}.${month}.${day}`;
-            if (getValue(normalizedEvents, path)) {
-                getValue(normalizedEvents, path).push(triggersSecondHalf[partialDate])
-            } else {
-                setValue(normalizedEvents, `${year}.${month}.${day}`, [triggersSecondHalf[partialDate]]);
-            }
+        const dateEvents = {
+            [info.startYear]: triggersFirstHalf,
+            [info.finishYear]: triggersSecondHalf,
+        };
+        Object.keys(dateEvents).forEach(year => {
+            Object.keys(dateEvents[year]).forEach(partialDate => {
+                const date = moment(`${partialDate}-${year}`, DATE_FORMAT);
+                this.appendEvent(date, dateEvents[year][partialDate], normalizedEvents);
+            });
         });
         return normalizedEvents;
     },
-    /**
-     months : {
-        {
-          name: 'June',
-          year: 2018,
-          days: [
-            {
-              date
-              events:[
-                string,
-              ]
-            }
-          ]
-        }
-
-     }
-     */
     getCalendarInfo(date, fixtures, info = {}) {
         const startYear = moment(fixtures.length > 0 ? fixtures[0].date : date).format(YEAR);
         const startDate = moment(`${BASE_DATES.GAME_START}${startYear}`, DATE_FORMAT);

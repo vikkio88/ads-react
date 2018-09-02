@@ -45,7 +45,7 @@ class Calendar extends Component {
         return (
             <div>
                 {this.getNavigation()}
-                <Month days={selectedMonth.days} date={this.props.date}/>
+                <Month name={selectedMonth.name} days={selectedMonth.days} date={this.props.date}/>
                 {this.getNavigation(false)}
             </div>
         );
