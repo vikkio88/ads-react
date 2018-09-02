@@ -9,25 +9,25 @@ class Fixture extends Component {
         if (!fixture.length) {
             return <Empty icon="calendar" text="No Fixtures available yet"/>;
         }
-        return (
-            <Tab
-                renderActiveOnly
-                panes={
-                    [
-                        {
-                            menuItem: 'Played',
-                            render: () => fixture.filter(f => f.played).reverse().map(f => <Result key={f.index}
-                                                                                                   result={f}/>)
-                        },
-                        {
-                            menuItem: 'Coming up',
-                            render: () => fixture.filter(f => !f.played).map(f => <Result key={f.index}
-                                                                                          result={f}/>)
-                        }
-                    ]
+        const played = fixture.filter(f => f.played).reverse();
+        const toPlay = fixture.filter(f => !f.played);
+        const panes = [];
+        if (played.length) {
+            panes.push(
+                {
+                    menuItem: 'Played',
+                    render: () => played.map(f => <Result key={f.index} result={f}/>)
                 }
-            />
+            );
+        }
+        panes.push(
+            {
+                menuItem: 'Coming up',
+                render: () => toPlay.map(f => <Result key={f.index} result={f}/>)
+            }
         );
+
+        return <Tab renderActiveOnly panes={panes}/>;
     }
 }
 
