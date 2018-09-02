@@ -72,7 +72,7 @@ export const nextDay = () => {
     return (dispatch, getState) => {
         const {game} = getState();
         dispatch(loadingStart());
-        dispatch(simulatingTimeFinished(...day.simulate(game)));
+        dispatch(simulatingTimeFinished(day.simulate(game)));
         setTimeout(() => dispatch(loadingFinished()), 600);
     };
 };
