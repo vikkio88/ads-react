@@ -3,12 +3,13 @@ import {Icon} from 'semantic-ui-react';
 import football from '../assets/images/football.svg';
 
 import './styles/Info.css';
-import {GAME_NAME} from "../config";
+import {GAME_NAME, GAME_VERSION} from "../config";
 
 const Info = () => (
     <div className="infoWrapper">
         <h1>About this game</h1>
         <h2>{GAME_NAME}</h2>
+        <h3>{GAME_VERSION}</h3>
         <img src={football} alt="football"/>
         <div className="linksWrapper">
             <p>This game is completely opensource.</p>
