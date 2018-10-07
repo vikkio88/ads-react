@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {Container, Progress, Rating, Segment, Icon} from "semantic-ui-react";
+import {Container, Progress, Rating, Segment} from "semantic-ui-react";
 import {AdsFlag, ValueLine} from "../common";
 import {extendedPositions} from "../../const";
 import {formatCurrency, percentageToColour, valueToRating} from "../../libs/utils";
@@ -15,13 +15,13 @@ class DetailsView extends Component {
             <Container fluid>
                 <Segment>
                     <div className="nameTitleWrapper">
-                        <div className="faceWrapper">
-                            <Icon name="user" size="big" circular/>
-                        </div>
                         <div className="nameWrapper">
                             <h1>{`${player.name} ${player.surname}`}</h1>
                             <AdsFlag name={player.nationality}/>
                         </div>
+                    </div>
+                    <div className="faceWrapper">
+                        <img src={`./players/pic_${player.pic}.svg`} alt={player.id}/>
                     </div>
                     <ValueLine.Group>
                         <ValueLine label="Age" value={player.age}/>

@@ -6,7 +6,8 @@
 }
 
 .faceWrapper {
-    flex: 1;
+    margin: auto;
+    width: 150px;
 }
 
 .nameWrapper {

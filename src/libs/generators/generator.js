@@ -63,7 +63,8 @@ const generator = {
             name: faker.name(locale),
             surname: faker.surname(locale),
             team: null,
-            contract: randomizer.int(1, 5)
+            contract: randomizer.int(1, 5),
+            pic: randomizer.int(0, 999)
         }
     },
     coach(forcedValues = {}) {
