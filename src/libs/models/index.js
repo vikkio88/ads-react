@@ -1,6 +1,8 @@
 export const baseJob = {
     contractEnds: null,
-    wage: null
+    wage: null, // this should be in thousands
+    board: 0,
+    supporters: 0,
 };
 
 export const baseLeague = {

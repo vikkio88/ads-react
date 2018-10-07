@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from "react-redux/es/connect/connect";
+import {connect} from "react-redux";
 import {Calendar as CalendarComponent} from '../components/calendar';
 
 const CalendarView = ({date, fixture, info}) => (<CalendarComponent date={date} fixture={fixture} info={info}/>);

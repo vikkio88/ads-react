@@ -16,7 +16,7 @@ class DashboardView extends Component {
     render() {
         const {nextDay, fastForward, game} = this.props;
         const {player, date, messages, news, team} = game.status;
-        const applications = getApps({messages, news});
+        const applications = getApps({messages, news}, team !== null);
         return (
             <div>
                 <Menu className="top fixed">

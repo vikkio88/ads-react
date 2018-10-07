@@ -4,3 +4,4 @@ export * from './News';
 export * from './Calendar';
 export * from './Database';
 export * from './Info';
+export * from './Profile';

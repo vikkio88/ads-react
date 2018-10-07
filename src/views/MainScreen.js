@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {Dashboard, Mail, News, Calendar, Database, Info} from './';
+import {Dashboard, Mail, News, Calendar, Database, Profile, Info} from './';
 import {Button, Container, Dimmer, Loader, Menu} from "semantic-ui-react";
 import {Login} from "./Login";
 import {navigatePop, navigate} from "../store/actions";
@@ -17,6 +17,7 @@ const componentMap = {
     'news': <News/>,
     'calendar': <Calendar/>,
     'database': <Database/>,
+    'profile': <Profile/>,
     'info': <Info/>,
 
     // AppsSubView

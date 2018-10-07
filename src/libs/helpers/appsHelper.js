@@ -28,14 +28,26 @@ const apps = [
         label: "Database"
     },
     {
+        name: "office",
+        icon: "id card",
+        label: "Office",
+        needsJob: true
+    },
+    {
+        name: "profile",
+        icon: "user",
+        label: "Profile"
+    },
+    {
         name: "info",
         icon: "info circle",
         label: "Info"
     },
 ];
 
-export const getApps = notifications => {
-    return apps.map(a => {
+export const getApps = (notifications, hired = false) => {
+    const filteredApps = apps.filter(a => !a.needsJob || (a.needsJob && hired));
+    return filteredApps.map(a => {
         if (!a.notifications) return a;
         const {name, active} = a.notifications;
         return {
