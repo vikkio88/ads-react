@@ -1,7 +1,7 @@
 const apps = [
     {
         name: "mail",
-        icon: "mail outline",
+        icon: "envelope outline",
         label: "Mail",
         notifications: {
             name: 'messages',
