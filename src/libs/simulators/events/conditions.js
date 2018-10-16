@@ -7,4 +7,10 @@ export default {
             return events.seasonOver;
         }
     },
+    notHired({status}) {
+        const {job} = status;
+        if (job === null) {
+            return events.teamOffersContract
+        }
+    }
 };

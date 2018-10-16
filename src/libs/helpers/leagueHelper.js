@@ -3,7 +3,7 @@ import {generator, randomizer} from '../generators';
 import {playerHelper} from './playerHelper';
 import {teamHelper} from './teamHelper';
 import {round} from '../simulators';
-import {newsGenerator, PAYLOAD_TYPES} from './newshelper';
+import {newsGenerator, NEWS_PAYLOAD_TYPES} from './newshelper';
 import {DATE_FORMAT} from '../../const';
 import {tableOrdering} from "../utils";
 import {playerMatchStatBase} from "../models";
@@ -175,7 +175,7 @@ const leagueHelper = {
                     `Round ${todayRound.index + 1} played`,
                     `Results\n`,
                     date.format(DATE_FORMAT),
-                    {type: PAYLOAD_TYPES.RESULT, data: results}
+                    {type: NEWS_PAYLOAD_TYPES.RESULT, data: results}
                 )
             );
         }

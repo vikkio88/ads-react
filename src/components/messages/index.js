@@ -1,2 +1,2 @@
 export * from './List';
-export * from './News';
+export * from './Message';

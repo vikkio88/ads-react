@@ -4,7 +4,7 @@ import MarkdownIt from 'markdown-it';
 import Interweave from 'interweave';
 import {Accordion, Card} from "semantic-ui-react";
 import {randomizer} from "../../libs/generators";
-import {PAYLOAD_TYPES} from "../../libs/helpers/newshelper";
+import {NEWS_PAYLOAD_TYPES} from "../../libs/helpers/newshelper";
 import {ResultLine} from "../league/match";
 
 
@@ -12,7 +12,7 @@ class NewsView extends Component {
 
     renderPayload(payload) {
         switch (payload.type) {
-            case PAYLOAD_TYPES.RESULT: {
+            case NEWS_PAYLOAD_TYPES.RESULT: {
                 return (
                     <Accordion styled fluid style={{fontSize: '16px'}}>
                         {payload.data.map((r, index) => <ResultLine key={index} match={r} played/>)}

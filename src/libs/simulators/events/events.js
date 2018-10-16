@@ -3,6 +3,8 @@ import {leagueHelper} from "../../helpers/leagueHelper";
 import {teamHelper} from "../../helpers/teamHelper";
 import {DATE_FORMAT} from "../../../const";
 import {newsGenerator} from "../../helpers/newshelper";
+import {randomizer} from "../../generators";
+import {messageGenerator} from "../../helpers";
 
 export const seasonOver = ({status, context}) => {
     const today = status.date;
@@ -54,4 +56,12 @@ export const seasonOver = ({status, context}) => {
     ];
     status.marketOpen = true;
     return {status, context, news};
+};
+
+export const teamOffersContract = ({status, context}) => {
+    const {teams} = context;
+    const team = randomizer.pickOne(teams.list);
+
+    const messages = messageGenerator.generate('Fuck you', team.name, 'I hate you!', status.date.format(DATE_FORMAT));
+    return {status, context, messages};
 };

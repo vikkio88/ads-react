@@ -31,3 +31,19 @@ export const playerMatchStatBase = {
     played: 1,
     rating: 0
 };
+
+
+/*
+    context: {
+        teams: {
+            hash: teamHelper.teamsToObject(teams),
+            list: teams
+        },
+        players: teamHelper.extractPlayersMap(teams),
+        league:
+            {
+                ...baseLeague,
+                table:teamHelper.createCleanTable(teams),
+            }
+    }
+*/
