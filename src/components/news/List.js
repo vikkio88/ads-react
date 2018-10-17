@@ -5,6 +5,8 @@ import {navigatePush} from "../../store/actions/navigation";
 import {removeNews, setNewsAsRead} from "../../store/actions/game";
 import {Empty} from "../common";
 
+import './List.css';
+
 class ListView extends Component {
     render() {
         const {news, readNews, setAsRead, remove} = this.props;
@@ -16,9 +18,11 @@ class ListView extends Component {
                 {news.map(n => (
                     <Card color={!n.read ? 'red' : null} fluid key={n.id}>
                         <Feed.Event>
-                            <Feed.Extra style={{display: 'flex', justifyContent: 'flex-end'}}>
-                                {!n.read && <Button icon="checkmark" onClick={() => setAsRead(n)}/>}
-                                <Button icon="trash" onClick={() => remove(n)}/>
+                            <Feed.Extra className="actionsWrapper">
+                                <div className="actions">
+                                    {!n.read && <Button icon="eye slash outline" onClick={() => setAsRead(n)}/>}
+                                    <Button icon="trash" onClick={() => remove(n)}/>
+                                </div>
                             </Feed.Extra>
                             <Feed.Label>
                                 <h2><a onClick={() => readNews(n)}>{n.newspaper}</a></h2>

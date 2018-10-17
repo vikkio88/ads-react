@@ -25,3 +25,8 @@
     flex: 5;
     font-weight: lighter;
 }
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+}
