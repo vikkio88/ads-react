@@ -3,7 +3,7 @@ import * as gameHelper from '../../../libs/helpers/gameHelper';
 import {baseGameStatus} from "../../../libs/models";
 import {BASE_DATES, DATE_FORMAT, YEAR} from "../../../const";
 import {day} from "../../../libs/simulators";
-import {newsHelper} from "../../../libs/helpers";
+import {messageHelper, newsHelper} from "../../../libs/helpers";
 
 export const NEW_GAME = 'new_game';
 export const LOAD_GAME = 'load_game';
@@ -113,6 +113,37 @@ export const removeNews = newsToRemove => {
         let {news} = status;
         news = newsHelper.remove(newsToRemove, news);
         status.news = news;
+        dispatch(modifyStatus(status));
+    };
+};
+
+// MESSAGES
+export const setMessageAsRead = message => {
+    return (dispatch, getState) => {
+        const {status} = getState().game;
+        let {messages} = status;
+        messages = messageHelper.setAsRead(message, messages);
+        status.messages = messages;
+        dispatch(modifyStatus(status));
+    };
+};
+
+export const setAllMessagesAsRead = () => {
+    return (dispatch, getState) => {
+        const {status} = getState().game;
+        let {messages} = status;
+        messages = messageHelper.setAllAsRead(messages);
+        status.messages = messages;
+        dispatch(modifyStatus(status));
+    };
+};
+
+export const removeMessage = messageToRemove => {
+    return (dispatch, getState) => {
+        const {status} = getState().game;
+        let {messages} = status;
+        messages = newsHelper.remove(messageToRemove, messages);
+        status.messages = messages;
         dispatch(modifyStatus(status));
     };
 };

@@ -6,6 +6,7 @@ import {Login} from "./Login";
 import {navigatePop, navigate} from "../store/actions";
 
 import {News as ReadNews} from "../components/news";
+import {Message as ReadMessage} from "../components/messages";
 
 import {Details as TeamDetails} from "../components/team";
 import {Details as PlayerDetails} from "../components/player";
@@ -22,6 +23,7 @@ const componentMap = {
 
     // AppsSubView
     'readNews': <ReadNews/>,
+    'readMessage': <ReadNews/>,
 
     // Teams Views
     'teamDetails': <TeamDetails/>,

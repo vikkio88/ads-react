@@ -1,3 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-export const Message = () => <h1>A Message</h1>;
+class MessageView extends Component {
+    render() {
+        return (
+            <div>
+            </div>
+        );
+    }
+}
+
+const stateToProps = () => {
+    return {};
+};
+const dispatchToProps = dispatch => {
+    return {
+        action() {
+            dispatch();
+        }
+    };
+};
+const Message = connect(stateToProps, dispatchToProps)(MessageView);
+export {Message};

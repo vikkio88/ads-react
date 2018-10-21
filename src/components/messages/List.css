@@ -1,6 +1,8 @@
 .messageWrapper {
     display: flex;
     padding: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon {
@@ -26,7 +28,15 @@
     font-weight: lighter;
 }
 
+.commandsWrapper {
+    flex: 2;
+}
+
 .actions {
     display: flex;
     justify-content: flex-end;
+}
+
+.toRead {
+    background-color: #e0e0e0;
 }
