@@ -3,22 +3,24 @@ import {connect} from 'react-redux';
 
 class MessageView extends Component {
     render() {
+        const {message} = this.props;
+        console.log(message);
         return (
-            <div>
-            </div>
+            <pre>
+                {JSON.stringify(message)}
+            </pre>
         );
     }
 }
 
-const stateToProps = () => {
-    return {};
+const stateToProps = ({navigation}) => {
+    const {payload} = navigation;
+    return {
+        message: payload
+    }
 };
 const dispatchToProps = dispatch => {
-    return {
-        action() {
-            dispatch();
-        }
-    };
+    return {};
 };
 const Message = connect(stateToProps, dispatchToProps)(MessageView);
 export {Message};

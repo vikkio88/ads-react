@@ -23,7 +23,7 @@ const componentMap = {
 
     // AppsSubView
     'readNews': <ReadNews/>,
-    'readMessage': <ReadNews/>,
+    'readMessage': <ReadMessage/>,
 
     // Teams Views
     'teamDetails': <TeamDetails/>,
