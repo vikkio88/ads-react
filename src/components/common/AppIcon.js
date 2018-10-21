@@ -8,6 +8,7 @@ import './AppIcon.css';
 class AppIconView extends Component {
     render() {
         const {icon, label, name, notifications} = this.props;
+        const notificationLabel = notifications > 99 ? '99+' : notifications;
         return (
             <Grid.Column>
                 <Segment className="appIconWrapper">
@@ -18,7 +19,7 @@ class AppIconView extends Component {
                         icon={icon}
                     />
                     <strong>{`${label}`}</strong>
-                    {notifications > 0 && <Label color='red' floating>{notifications}</Label>}
+                    {notifications > 0 && <Label color='red' floating>{notificationLabel}</Label>}
                 </Segment>
             </Grid.Column>
         );
