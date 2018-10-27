@@ -1,14 +1,28 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Segment} from "semantic-ui-react";
+import {ValueLine} from "../common";
+
+import './Message.css';
 
 class MessageView extends Component {
     render() {
         const {message} = this.props;
-        console.log(message);
         return (
-            <pre>
-                {JSON.stringify(message)}
-            </pre>
+            <Segment>
+                <ValueLine.Group>
+                    <ValueLine label="from" value={message.from}/>
+                    <ValueLine label="date" value={message.date}/>
+                    <ValueLine label="subject" value={message.subject}/>
+                </ValueLine.Group>
+                <Segment>
+                    <div className="messageWrapper">
+                        <p>
+                            {message.message}
+                        </p>
+                    </div>
+                </Segment>
+            </Segment>
         );
     }
 }

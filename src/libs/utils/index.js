@@ -4,6 +4,7 @@ import objectPath from 'object-path';
 import {teamHelper} from "../helpers/teamHelper";
 import {extendedPositions} from "../../const";
 
+export const truncateText = (text, maxSize = 26, replacement = '...') => text.substr(0, maxSize - 1) + (text.length > maxSize ? replacement : '');
 export const tableOrdering = field => {
     return (row1, row2) => row1[field] < row2[field] ? 1 : -1;
 };

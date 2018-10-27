@@ -62,6 +62,11 @@ export const teamOffersContract = ({status, context}) => {
     const {teams} = context;
     const team = randomizer.pickOne(teams.list);
 
-    const messages = messageGenerator.generate('Fuck you', team.name, 'I hate you!', status.date.format(DATE_FORMAT));
+    const messages = messageGenerator.generate(
+        'Contract Offer',
+        team.name,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        status.date.format(DATE_FORMAT)
+    );
     return {status, context, messages};
 };

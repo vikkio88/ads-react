@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import classnames from 'classnames'
 import {Empty} from "../common";
-import {List as SList, Button} from "semantic-ui-react";
+import {List as SList, Button, Responsive} from "semantic-ui-react";
 
 import './List.css';
 import {removeMessage, setAllMessagesAsRead, setMessageAsRead} from "../../store/actions/game";
 import {navigatePush} from "../../store/actions/navigation";
+import {truncateText} from "../../libs/utils";
 
 class ListView extends Component {
     render() {
@@ -36,8 +37,10 @@ class ListView extends Component {
                                     </div>
                                     <div className="from">{m.from}</div>
                                     <div className="subject">{m.subject}</div>
-                                    <div className="date">{m.date}</div>
-                                    <div className="preview">{m.message}</div>
+                                    <Responsive minWidth={Responsive.onlyMobile}>
+                                        <div className="date">{m.date}</div>
+                                        <div className="preview">{truncateText(m.message)}</div>
+                                    </Responsive>
                                     <div className="commandsWrapper">
                                         <Button size="mini" icon="trash" onClick={() => remove(m)}/>
                                         {!m.read &&

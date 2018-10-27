@@ -1,0 +1,12 @@
+.messageWrapper {
+    line-height: 1em;
+    margin: 0;
+    padding: 5px;
+    text-align: justify;
+    font-size: larger;
+}
+
+.messageWrapper p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
