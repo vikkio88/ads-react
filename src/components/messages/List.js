@@ -37,10 +37,8 @@ class ListView extends Component {
                                     </div>
                                     <div className="from">{m.from}</div>
                                     <div className="subject">{m.subject}</div>
-                                    <Responsive minWidth={Responsive.onlyMobile}>
-                                        <div className="date">{m.date}</div>
-                                        <div className="preview">{truncateText(m.message)}</div>
-                                    </Responsive>
+                                    <div className="date mobileHide">{m.date}</div>
+                                    <div className="preview mobileHide">{truncateText(m.message)}</div>
                                     <div className="commandsWrapper">
                                         <Button size="mini" icon="trash" onClick={() => remove(m)}/>
                                         {!m.read &&
