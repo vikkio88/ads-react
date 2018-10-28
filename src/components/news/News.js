@@ -2,26 +2,22 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import MarkdownIt from 'markdown-it';
 import Interweave from 'interweave';
-import {Accordion, Card} from "semantic-ui-react";
+import {Card} from "semantic-ui-react";
 import {randomizer} from "../../libs/generators";
 import {NEWS_PAYLOAD_TYPES} from "../../libs/helpers/newshelper";
-import {ResultLine} from "../league/match";
+import {MatchResult} from "./payloads";
+
+const payloadMapping = {
+    [NEWS_PAYLOAD_TYPES.RESULT]: payload => <MatchResult payload={payload}/>,
+    default: () => <span/>
+};
 
 
 class NewsView extends Component {
 
     renderPayload(payload) {
-        switch (payload.type) {
-            case NEWS_PAYLOAD_TYPES.RESULT: {
-                return (
-                    <Accordion styled fluid style={{fontSize: '16px'}}>
-                        {payload.data.map((r, index) => <ResultLine key={index} match={r} played/>)}
-                    </Accordion>
-                );
-            }
-            default:
-                return <span/>;
-        }
+        const component = payloadMapping[payload.type] || payloadMapping.default;
+        return component(payload);
     }
 
     render() {
