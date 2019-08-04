@@ -23,6 +23,20 @@ export const baseGameStatus = {
     history: {
         seasons: [],
         player: []
+    },
+    // misc info
+    // like team that are offering or players relationship
+    misc: {
+        teams: {
+            /*
+            'id' : { relationship: 50, offering: false}
+            */
+        },
+        players: {
+            /*
+            'id' : { relationship: 50, offering: false}
+            */
+        },
     }
 };
 
