@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "apexcharts": "^1.5.6",
+    "apexcharts": "^3.24.0",
     "classnames": "^2.2.6",
     "interweave": "^8.1.0",
     "markdown-it": "^8.4.2",
